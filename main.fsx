@@ -12,7 +12,7 @@ type state = float
 /// <param name=(x1,y1)> first vector </param>
 /// <param name=(x2,y2)> second vector </param>
 /// <returns> sum of the two vectors </returns>
-let vecSum (x1:float, y1:float) (x2:float, y2:float) = 
+let add (x1:float, y1:float) (x2:float, y2:float) = 
   (x1 + x2, y1 + y2)
 
 /// <summary>
@@ -22,7 +22,7 @@ let vecSum (x1:float, y1:float) (x2:float, y2:float) =
 /// <param name="f">coefficient</param>
 /// <param name="v">vector</param>
 /// <returns>New vector f*v.</returns>
-let vecMull (f:float) (v1:float, v2:float): vec =
+let mul (f:float) (v1:float, v2:float): vec =
   (v1*f,v2*f)
 
 /// <summary>
@@ -31,7 +31,7 @@ let vecMull (f:float) (v1:float, v2:float): vec =
 /// <param name="r">radians clockwise</param>
 /// <param name="v">vector</param>
 /// <returns>New vector rotated r radians clockwise.</returns>
-let vecRotate (r:float) (v1,v2) : vec =
+let rot (r:float) (v1,v2) : vec =
   (v1*cos(r)-v2*sin(r),v1*sin(r)+v2*cos(r))
 
 /// <summary>
@@ -54,7 +54,7 @@ let toInt (v1:float, v2:float):vec : int*int =
 /// <returns>unit</returns>
 let setVector (c:canvas) (Col) (vec:vec) (pos:vec) =
   let start = toInt pos
-  let tempFloatVector = vecSum vec pos
+  let tempFloatVector = add vec pos
   let destination = toInt(tempFloatVector)
   do setLine c black start destination
 
@@ -74,7 +74,7 @@ let draw (height:int) (width:int) (s:state) =
   let rec drawSpokes (amount:float) =
     match amount with
       | n when 1.0 <= n ->
-        setVector C black (vecRotate (s + amount*2.0*System.Math.PI/36.0) v) center
+        setVector C black (rot (s + amount*2.0*System.Math.PI/36.0) v) center
         drawSpokes (amount - 1.0)
       | _ -> ()
   do drawSpokes spokes
