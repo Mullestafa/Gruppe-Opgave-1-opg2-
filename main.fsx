@@ -4,6 +4,9 @@ open Canvas
 
 type vec = float * float
 
+let vecSum (x1:float, y1:float) (x2:float, y2:float) : vec = 
+    (x1 + x2, y1 + y2)
+
 /// <summary>
 /// given two vectors, return their sum
 /// </summary>
@@ -57,3 +60,4 @@ let draw (height:int) (width:int) =
   C
 let Can = draw 600 600
 show Can "hejsa"
+
