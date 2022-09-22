@@ -4,7 +4,7 @@ open Canvas
 
 type vec = float * float
 
-
+type state = float
 
 /// <summary>
 /// given two vectors, return their sum
@@ -65,16 +65,16 @@ let setVector (c:canvas) (Col) (vec:vec) (pos:vec) =
 /// <param name="height">height</param>
 /// <param name="width">width</param>
 /// <returns>Canvas</returns>
-let draw (height:int) (width:int) =
+let draw (height:int) (width:int) (s:state) =
   let C = create (width:int) (height:int)
-  let v = (200.0,0.0)
+  let v = (250.0,0.0)
   let center= (float(height/2), float(width/2))
   let spokes = 36.0
 
   let rec drawSpokes (amount:float) =
     match amount with
       | n when 1.0 <= n ->
-        setVector C black (vecRotate (amount*2.0*System.Math.PI/36.0) v) center
+        setVector C black (vecRotate (s + amount*2.0*System.Math.PI/36.0) v) center
         drawSpokes (amount - 1.0)
       | _ -> ()
   do drawSpokes spokes
@@ -82,5 +82,18 @@ let draw (height:int) (width:int) =
 
 
 
-let Canvas = draw 600 600
-show Canvas "hejsa"
+let react (s:state) (k:key) : state option =
+    let stepsize = 0.01 // How far box should move for each keypress
+    match getKey k with
+        | LeftArrow ->
+            Some (s - stepsize)
+        | RightArrow ->
+            Some (s + stepsize)
+        |_ -> None
+
+
+
+
+
+
+do runApp "hejsa" 600 600 draw react 0.0
