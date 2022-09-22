@@ -1,2 +1,2 @@
-printfn "hello world"
-printfn "Hello Mustafa"
+type vec = float * float
+
