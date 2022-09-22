@@ -83,21 +83,13 @@ let draw (height:int) (width:int) (s:state) =
 
 
 let react (s:state) (k:key) : state option =
-<<<<<<< HEAD
     let stepsize = 0.01 // How far spokes should rotate for each keypress
-=======
-    let stepsize = 0.01 // How far box should move for each keypress
->>>>>>> 6b4422e6780866bc10480ad155a518e0a05a0d69
     match getKey k with
         | LeftArrow ->
             Some (s - stepsize)
         | RightArrow ->
             Some (s + stepsize)
         |_ -> None
-
-
-
-
 
 
 do runApp "hejsa" 600 600 draw react 0.0
