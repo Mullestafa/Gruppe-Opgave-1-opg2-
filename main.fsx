@@ -67,7 +67,7 @@ let setVector (c:canvas) (Col) (vec:vec) (pos:vec) =
 /// <returns>Canvas</returns>
 let draw (height:int) (width:int) (s:state) =
   let C = create (width:int) (height:int)
-  let v = (250.0,0.0)
+  let v = (300.0,0.0)
   let center= (float(height/2), float(width/2))
   let spokes = 36.0
 
