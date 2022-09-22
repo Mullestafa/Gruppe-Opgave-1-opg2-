@@ -4,8 +4,7 @@ open Canvas
 
 type vec = float * float
 
-let vecSum (x1:float, y1:float) (x2:float, y2:float) : vec = 
-    (x1 + x2, y1 + y2)
+
 
 /// <summary>
 /// given two vectors, return their sum
@@ -44,20 +43,44 @@ let vecRotate (r:float) (v1,v2) : vec =
 let toInt (v1:float, v2:float):vec : int*int =
   (int (System.Math.Round(v1)), int (System.Math.Round(v2)))
 
-
+/// <summary>
+/// Given a c canvas, col color, vec vector, and pos vector
+/// defines a line on c wih color col, corrosponding to vec orignaing in pos
+/// </summary>
+/// <param name="c">Canvas</param>
+/// <param name="col">color</param>
+/// <param name="vec">vecor</param>
+/// <param name="pos">origin</param>
+/// <returns>unit</returns>
 let setVector (c:canvas) (Col) (vec:vec) (pos:vec) =
   let start = toInt pos
-  let newFloatVector = vecSum vec pos
-  let destination = toInt(newFloatVector)
+  let tempFloatVector = vecSum vec pos
+  let destination = toInt(tempFloatVector)
   do setLine c black start destination
 
+/// <summary>
+/// Given parameters heih and width, both of type int
+/// returns a canvas with 36 equally spaced spokes drawn in a circle originating from the center
+/// </summary>
+/// <param name="height">height</param>
+/// <param name="width">width</param>
+/// <returns>Canvas</returns>
 let draw (height:int) (width:int) =
   let C = create (width:int) (height:int)
   let v = (200.0,0.0)
-  let c = (float(height/2), float(width/2))
-  for i in 1.0 .. 36.0 do
-    do setVector C black (vecRotate (i*2.0*System.Math.PI/36.0) v) c
-  C
-let Can = draw 600 600
-show Can "hejsa"
+  let center= (float(height/2), float(width/2))
+  let spokes = 36.0
 
+  let rec drawSpokes (amount:float) =
+    match amount with
+      | n when 1.0 <= n ->
+        setVector C black (vecRotate (amount*2.0*System.Math.PI/36.0) v) center
+        drawSpokes (amount - 1.0)
+      | _ -> ()
+  do drawSpokes spokes
+  C
+
+
+
+let Canvas = draw 600 600
+show Canvas "hejsa"
