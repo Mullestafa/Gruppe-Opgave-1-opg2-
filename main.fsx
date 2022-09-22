@@ -1,2 +1,4 @@
-printfn "hello world"
-printfn "Hello Mustafa"
+#r "nuget:DIKU.Canvas, 1.0"
+
+open Canvas
+
