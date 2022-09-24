@@ -41,7 +41,7 @@ let rot (r:float) (v1,v2) : vec =
 /// <param name="v">vector</param>
 /// <returns>New tuple in int.</returns>
 let toInt (v1:float, v2:float):vec : int*int =
-  (int (System.Math.Round(v1)), int (System.Math.Round(v2)))
+  (int (v1 + 0.5), int (v2 + 0.5))
 
 /// <summary>
 /// Given a c canvas, col color, vec vector, and pos vector
@@ -74,14 +74,20 @@ let draw (height:int) (width:int) (s:state) =
   let rec drawSpokes (amount:float) =
     match amount with
       | n when 1.0 <= n ->
-        setVector C black (rot (s + amount*2.0*System.Math.PI/36.0) v) center
+        setVector C black (rot (s + amount*2.0*System.Math.PI/spokes) v) center
         drawSpokes (amount - 1.0)
       | _ -> ()
   do drawSpokes spokes
   C
 
 
-
+/// <summary>
+/// Canvas function for listening and reacting to input events
+/// and consequently updating state.
+/// </summary>
+/// <param name="s">the state</param>
+/// <param name="k">input</param>
+/// <returns>Canvas</returns>
 let react (s:state) (k:key) : state option =
     let stepsize = 0.01 // How far spokes should rotate for each keypress
     match getKey k with
@@ -92,4 +98,4 @@ let react (s:state) (k:key) : state option =
         |_ -> None
 
 
-do runApp "Radial Vectors" 600 600 draw react 0.0
+runApp "Radial Vectors" 600 600 draw react 0.0
