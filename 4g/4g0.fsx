@@ -27,16 +27,12 @@ let candidates (src:pos) (tg:pos) : (pos list) =
 //printfn "%A" (candidates (0,0) (2,2))
 
 let rec routes (src:pos) (tg:pos) : pos list list =
-    printfn "%A" src
     match src with
-    | (1,1) -> [[tg]]
+    | (1,1) -> [[]]
     | _ ->
         let cand = candidates src tg
-        printfn "%A" cand
-        List.concat (List.map (fun (i:pos) -> List.map (fun (j:pos) -> [i] @ List.concat (routes j tg)) cand) [src])
-//        List.concat (List.map (fun (i:pos) -> (List.map (fun (j:pos) -> [[i] @ (List.concat (routes j tg))]) (cand))) [src])
+        List.concat (List.map (fun (i:pos) -> (List.map (fun (j:pos list) -> ([i] @ j)) (routes i tg))) cand)
         
 
 
 printfn "%A" (routes (3,3) (1,1))
-*)
