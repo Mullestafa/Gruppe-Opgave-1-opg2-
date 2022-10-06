@@ -120,13 +120,14 @@ List.map (fun a -> List.map (fun b -> drawCircle 0.0 b) a ) coords
 let theRoute = routes start target
 printfn "%A" theRoute
 
-let drawLines theRoute =
+let drawLines theRoute : unit =
     let drawLine acc elm = 
         setLine C black acc elm
         elm
     
     for (i:pos list) in theRoute do
         List.fold drawLine i.Head i
+        |> ignore
 
 let actualRoute = List.map (fun a -> List.map (fun b -> coords[fst b][snd b] ) a )  theRoute
 
