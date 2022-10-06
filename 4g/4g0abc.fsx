@@ -57,5 +57,5 @@ let rec routes (src:pos) (tg:pos) : pos list list =
             |> List.concat
             |> List.map (fun e -> src::e)
 
-printfn "%A" (routes (1,1) (3,3))
+printfn "%A" (routes (1,1) (2,4))
 
