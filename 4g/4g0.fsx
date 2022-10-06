@@ -26,6 +26,12 @@ let candidates (src:pos) (tg:pos) : (pos list) =
     List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent
 //printfn "%A" (candidates (0,0) (2,2))
 
+let candidatesDiag (src:pos) (tg:pos) : (pos list) =
+    let x, y = src
+    let adjacent =[(x,y-1); (x+1,y); (x, y+1); (x-1,y)]
+    let diagonal =[(x+1,y+1); (x+1,y-1); (x-1, y+1); (x-1, y-1)]
+    List.filter (fun i -> (dist i tg) < (dist src tg)) (adjacent@diagonal)
+//printfn "%A" (candidatesDiag (0,0) (2,2))
 
 /// <summary>
 /// given a source and a destination, returns
@@ -39,10 +45,25 @@ let rec routes (src:pos) (tg:pos) : pos list list =
     match src with
         a when a = tg -> [[src]]
         | _ -> 
-            candidates src tg
-            |> List.map (fun p -> routes p tg)
-            |> List.concat
-            |> List.map (fun instr -> src::instr)
+            /// <summary>
+            /// Given a list of paths, find the
+            /// shortest length of paths
+            /// and return those of the same length
+            /// </summary>
+            /// <param name=scs> source point </param>
+            /// <param name=tg> destination point </param>
+            /// <returns> list of lists with shortest paths </returns>
+            let shortestLists (allPaths:pos list list) =
+                let minimumLength = List.min (List.map (fun l -> List.length l) allPaths)
+                List.filter (fun list -> List.length list = minimumLength) allPaths
+                
 
-printfn "%A" (routes (3,3) (1,1))
+            //candidates src tg
+            candidatesDiag src tg
+            |> List.map (fun e -> routes e tg)
+            |> List.concat
+            |> List.map (fun e -> src::e)
+            |> shortestLists 
+
+printfn "%A" (routes (0,0) (3,4))
 
