@@ -26,13 +26,23 @@ let candidates (src:pos) (tg:pos) : (pos list) =
     List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent
 //printfn "%A" (candidates (0,0) (2,2))
 
+
+/// <summary>
+/// given a source and a destination, returns
+/// a list of lists containing every shortest path
+/// to destination
+/// </summary>
+/// <param name=scs> source point </param>
+/// <param name=tg> destination point </param>
+/// <returns> list of lists with shortest paths </returns>
 let rec routes (src:pos) (tg:pos) : pos list list =
     match src with
         a when a = tg -> [[src]]
         | _ -> 
             candidates src tg
             |> List.map (fun p -> routes p tg)
-            |> List.collect (fun paths -> List.map (fun path -> src::path) paths)
+            |> List.concat
+            |> List.map (fun instr -> src::instr)
 
 printfn "%A" (routes (3,3) (1,1))
 
