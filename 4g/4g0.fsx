@@ -26,13 +26,6 @@ let candidates (src:pos) (tg:pos) : (pos list) =
     List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent
 //printfn "%A" (candidates (0,0) (2,2))
 
-let rec routes (src:pos) (tg:pos) : pos list list =
-    match src with
-    | (1,1) -> [[]]
-    | _ ->
-        let cand = candidates src tg
-        List.concat (List.map (fun (i:pos) -> (List.map (fun (j:pos list) -> ([i] @ j)) (routes i tg))) cand)
-        
 
 /// <summary>
 /// given a source and a destination, returns
