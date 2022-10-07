@@ -22,9 +22,7 @@ let dist (p1:pos) (p2:pos) : int =
 /// <returns> list of adjacent positions that are closer to destination </returns>
 let candidates (src:pos) (tg:pos) : (pos list) =
     let x, y = src
-    let adjacentElements : pos list = [(1,0);(-1,0);(0,1);(0,-1)]
-    let adjacent : pos list =  List.map (fun adj -> (fst adj + x, snd adj + y)) adjacentElements // all positions adjacent to src
-
+    let adjacent =[(x,y-1); (x+1,y); (x, y+1); (x-1,y)]
     let adjacentCandidates : pos list = List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent // all relevant positions
     let candidateSum : pos = List.fold (fun (a,b) (c,d) -> (a+c-x,b+d-y) ) (0,0) adjacentCandidates // sum of move commands
 
