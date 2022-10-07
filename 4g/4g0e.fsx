@@ -139,6 +139,6 @@ let drawRoutes (canvasSize:pos) (start:pos) (target:pos) =
     do show C "Routes"
 
 
-drawRoutes (600, 400) (5,10) (2,2)
+drawRoutes (600, 400) (3,4) (1,1)
 
 

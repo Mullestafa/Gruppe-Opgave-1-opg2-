@@ -10,7 +10,6 @@ let dist (p1:pos) (p2:pos) : int =
     let xDelta = (fst p2) - (fst p1)
     let yDelta = (snd p2) - (snd p1)
     xDelta * xDelta +  yDelta * yDelta
-//printfn "%A" (dist (0,0) (2,2))
 
 /// <summary>
 /// given a source and a destination, returns
@@ -23,19 +22,17 @@ let dist (p1:pos) (p2:pos) : int =
 let candidates (src:pos) (tg:pos) : (pos list) =
     let x, y = src
     let adjacent =[(x,y-1); (x+1,y); (x, y+1); (x-1,y)]
-    let adjacentCandidates : pos list = List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent // all relevant positions
-    let candidateSum : pos = List.fold (fun (a,b) (c,d) -> (a+c-x,b+d-y) ) (0,0) adjacentCandidates // sum of move commands
+    let adjacentCandidates : pos list = 
+        List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent // all relevant positions
+    let candidateSum : pos = 
+        List.fold (fun (a,b) (c,d) -> (a+c-x,b+d-y) ) (0,0) adjacentCandidates // sum of move commands
 
     if  fst candidateSum <> 0 && snd candidateSum <> 0 then
-        let diagonalPosition = (x + fst candidateSum, y + snd candidateSum) // add src to candidateSum to get diagonal position
+        let diagonalPosition = 
+            (x + fst candidateSum, y + snd candidateSum) // add src to candidateSum to get diagonal position
         diagonalPosition::adjacentCandidates
     else
         adjacentCandidates
-//printfn "cands %A" (candidates (0,0) (0,0))
-
-
-
-//printfn "%A" (candidatesDiag (0,0) (2,2))
 
 /// <summary>
 /// given a source and a destination, returns
@@ -69,6 +66,6 @@ let rec routes (src:pos) (tg:pos) : pos list list =
             |> List.map (fun e -> src::e)
             |> shortestLists 
 
-printfn "%A" (routes (0,0) (1,2))
+printfn "%A" (routes (0,0) (3,5))
 
 
