@@ -25,15 +25,17 @@ let dist (p1:pos) (p2:pos) : int =
 let candidates (src:pos) (tg:pos) : (pos list) =
     let x, y = src
     let adjacent =[(x,y-1); (x+1,y); (x, y+1); (x-1,y)]
-    let adjacentCandidates : pos list = List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent // all relevant positions
-    let candidateSum : pos = List.fold (fun (a,b) (c,d) -> (a+c-x,b+d-y) ) (0,0) adjacentCandidates // sum of move commands
+    let adjacentCandidates : pos list = 
+        List.filter (fun i -> (dist i tg) < (dist src tg)) adjacent // all relevant positions
+    let candidateSum : pos = 
+        List.fold (fun (a,b) (c,d) -> (a+c-x,b+d-y) ) (0,0) adjacentCandidates // sum of move commands
 
     if  fst candidateSum <> 0 && snd candidateSum <> 0 then
-        let diagonalPosition = (x + fst candidateSum, y + snd candidateSum) // add src to candidateSum to get diagonal position
+        let diagonalPosition = 
+            (x + fst candidateSum, y + snd candidateSum) // add src to candidateSum to get diagonal position
         diagonalPosition::adjacentCandidates
     else
         adjacentCandidates
-//printfn "candidatesDiag: %A" (candidates (0,0) (2,4))
 
 /// <summary>
 /// given a source and a destination, returns
@@ -52,8 +54,7 @@ let rec routes (src:pos) (tg:pos) : pos list list =
                 let minimumLength = List.min (List.map (fun l -> List.length l) allPaths)
                 List.filter (fun list -> List.length list = minimumLength) allPaths
                 
-
-            //candidates src tg
+                
             candidates src tg
             |> List.map (fun e -> routes e tg)
             |> List.concat
@@ -107,7 +108,7 @@ let drawRoutes (canvasSize:pos) (start:pos) (target:pos) =
             let d: int = int (yZero + rad * sin nextangle)
             setLine C black (a, b) (c, d)
             drawCircle (nextangle) point rad
-        else // tegn det sidste stykke for at slutte cirkelen (da vi itererer funktionen med rationelle tal (0.1))
+        else // tegn det sidste stykke for at slutte cirklen (da vi itererer funktionen med rationelle tal (0.1))
             let a: int = int (xZero + rad * cos angle)
             let b: int = int (yZero + rad * sin angle)
             let c: int = int (xZero + rad * cos (2.0 * System.Math.PI))
