@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "04mzCWSIi5dWphMeLq101Z7DLpzjvG7MQ25hc10sV2xj/GeaavoO7xQ8Aw83+nsXgUzho/O9lDvM28YtEqGiSw==",
+  "success": true,
+  "projectFilePath": "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\musta\\.nuget\\packages\\fsharp.core\\6.0.5\\fsharp.core.6.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
