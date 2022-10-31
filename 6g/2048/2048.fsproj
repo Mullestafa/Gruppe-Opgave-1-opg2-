@@ -8,4 +8,7 @@
     <Compile Include="Program.fsi" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DIKU.Canvas" Version="1.0.1" />
+  </ItemGroup>
 </Project>

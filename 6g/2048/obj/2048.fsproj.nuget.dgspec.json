@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj": {}
+    "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj": {}
   },
   "projects": {
-    "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj": {
+    "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+        "projectUniqueName": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj",
         "projectName": "2048",
-        "projectPath": "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
-        "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-        "outputPath": "D:\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\obj\\",
+        "projectPath": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj",
+        "packagesPath": "/home/jakupl/.nuget/packages/",
+        "outputPath": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/jakupl/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files\\dotnet\\sdk\\6.0.400\\FSharp\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,10 +33,15 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "DIKU.Canvas": {
+              "target": "Package",
+              "version": "[1.0.1, )",
+              "generatePathProperty": true
+            },
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[6.0.5, )",
+              "version": "[6.0.1, )",
               "generatePathProperty": true
             }
           },
@@ -47,17 +51,22 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.10, 6.0.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.110/RuntimeIdentifierGraph.json"
         }
       }
     }
