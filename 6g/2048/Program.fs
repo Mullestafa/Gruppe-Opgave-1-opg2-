@@ -29,21 +29,36 @@ let nextColor (v:value) : value =
 let rec filter (n:int) (s:state) : state =
     match s with
         | ele::rest ->
-            let (_,(_,y)) = ele
-            match (y=n) with
+            let (_,(x,_)) = ele
+            match (x=n) with
             | true -> [ele] @ (filter n rest)
             | _ -> filter n rest
         | _ -> []
 
 
-
+let rec shiftUp (s:state) : state =
+    // This function should shift as far as possible UP
+    // And merge when necessary
+    // here is some pseoudocode
+    (*
+    for each column (using filterfunction):
+        sort by row
+        for every tile:
+            if color matches with adjecent tile:
+                replace the two tiles with one tile of (nextColor,(this tile position))
+        l = length of list
+        move tiles to positions 0 to l
+    *)
+    let rec buildList (clm:int) (s:state) : state =
+        match clm with
+            n when n > 2 ->
+                []
+            | _ -> 
+                let thisColumn = s |> filter clm |> List.sortBy (fun (_,(_,y)) -> y)
+                thisColumn @ buildList (clm+1) s
+    buildList 0 s // This just sorts the list... TODO make it compare adjacent tiles and return appropriate state
 
 (*
-
-
-let shiftUp (s:state) : state =
-    //find empty positioner i hver kolonne og ryk hvert brik med det antal
-
 
 let flipUD (s:state) : state =
     //(i,j) -> (2 -i,j), e.g.
@@ -56,8 +71,11 @@ let transpose (s:state) : state =
 // val empty : state -> pos list
 // val addRandom : value -> state -> state option
 //let hejsa = Canvas.Item("r")
+let testlist = [(Red ,(1,0)); (Red ,(1,1)); (Blue ,(0,2)); (Black ,(2,1)); (Red ,(2,0)); (Red ,(0,1))]
 let out = fromValue (nextColor Red)
-let fi = filter 0 [(Red ,(1,0)); (Red ,(1,1))]
-printfn "%A" fi
+let fi = filter 0 testlist
+let shu = shiftUp testlist
+
+printfn "%A" shu
 
 
