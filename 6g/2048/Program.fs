@@ -38,12 +38,12 @@ let rec filter (n:int) (s:state) : state =
 
 
 
-
+(*
 
 
 let shiftUp (s:state) : state =
     //find empty positioner i hver kolonne og ryk hvert brik med det antal
-(*
+
 
 let flipUD (s:state) : state =
     //(i,j) -> (2 -i,j), e.g.
