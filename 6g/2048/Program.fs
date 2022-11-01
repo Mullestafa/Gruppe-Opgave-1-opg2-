@@ -53,10 +53,10 @@ let rec shiftUp (s:state) : state =
     *)
     let rec mergeTiles (s:state) : state =
         match s with
-            | (col1,pos1)::(col2,pos2)::rest when col1=col2 ->
-                let col3 = nextColor col1
-                (col3,pos1)::(mergeTiles rest)
-            | _ -> s
+        | s when s.Length = 1 -> s 
+        | elem::rest -> if (fst elem) = (fst rest.Head) then [(nextColor (fst elem),snd elem)] @ rest.Tail else [elem] @ (mergeTiles rest)
+        | [] -> []
+
     let rec shoveTiles (n:int) (s:state)  : state =
         match s with
             |(col,(x,y))::rest -> (col,(x,n))::(shoveTiles (n+1) rest)
@@ -101,9 +101,13 @@ let empty (s:state) : (pos list) =
 let addRandom (color:value) (s:state) : state option =
     let emptySlots = empty s
     if emptySlots.Length > 0 then
+<<<<<<< HEAD
         printfn "emptySlots = %A" emptySlots
         let rnd = Random().Next(0, emptySlots.Length)
         printfn "rnd = %A" rnd
+=======
+        let rnd = Random().Next(0, emptySlots.Length)
+>>>>>>> a060e030e5c695820e6eb4848568acb10aa8c0c4
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 
