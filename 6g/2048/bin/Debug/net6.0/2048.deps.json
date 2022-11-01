@@ -9,7 +9,7 @@
       "2048/1.0.0": {
         "dependencies": {
           "DIKU.Canvas": "1.0.1",
-          "FSharp.Core": "6.0.1"
+          "FSharp.Core": "6.0.5"
         },
         "runtime": {
           "2048.dll": {}
@@ -17,7 +17,7 @@
       },
       "DIKU.Canvas/1.0.1": {
         "dependencies": {
-          "FSharp.Core": "6.0.1",
+          "FSharp.Core": "6.0.5",
           "StbImageSharp": "2.27.11",
           "StbImageWriteSharp": "1.16.7"
         },
@@ -46,20 +46,20 @@
           "runtimes/win-x64/native/SDL2.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.24.0.0"
           },
           "runtimes/win-x86/native/SDL2.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.24.0.0"
           }
         }
       },
-      "FSharp.Core/6.0.1": {
+      "FSharp.Core/6.0.5": {
         "runtime": {
           "lib/netstandard2.1/FSharp.Core.dll": {
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.121.52202"
+            "fileVersion": "6.0.522.36304"
           }
         },
         "resources": {
@@ -135,12 +135,12 @@
       "path": "diku.canvas/1.0.1",
       "hashPath": "diku.canvas.1.0.1.nupkg.sha512"
     },
-    "FSharp.Core/6.0.1": {
+    "FSharp.Core/6.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VrFAiW8dEEekk+0aqlbvMNZzDvYXmgWZwAt68AUBqaWK8RnoEVUNglj66bZzhs4/U63q0EfXlhcEKnH1sTYLjw==",
-      "path": "fsharp.core/6.0.1",
-      "hashPath": "fsharp.core.6.0.1.nupkg.sha512"
+      "sha512": "sha512-Bpqxoh/UUTq7fHd0a1Ndv/ml1BEtwqmpruKzIMaNnNXgdBSZOEA7wQtoXyc+eKwxq4TQrbHpAbM6yaZAzqotvw==",
+      "path": "fsharp.core/6.0.5",
+      "hashPath": "fsharp.core.6.0.5.nupkg.sha512"
     },
     "StbImageSharp/2.27.11": {
       "type": "package",

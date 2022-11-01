@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj": {}
+    "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj": {
+    "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+        "projectUniqueName": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj",
         "projectName": "2048",
-        "projectPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+        "projectPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj",
         "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\obj\\",
+        "outputPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -34,11 +34,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "DIKU.Canvas": {
-              "target": "Package",
-              "version": "[1.0.1, )",
-              "generatePathProperty": true
-            },
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",

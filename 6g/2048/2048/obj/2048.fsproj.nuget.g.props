@@ -14,6 +14,5 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\musta\.nuget\packages\fsharp.core\6.0.5</PkgFSharp_Core>
-    <PkgDIKU_Canvas Condition=" '$(PkgDIKU_Canvas)' == '' ">C:\Users\musta\.nuget\packages\diku.canvas\1.0.1</PkgDIKU_Canvas>
   </PropertyGroup>
 </Project>
