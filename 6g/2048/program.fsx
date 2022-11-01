@@ -1,8 +1,8 @@
 open Game
 
-let draw (height:int) (width:int) (s:state) =
-    let C = Canvas.create (width:int) (height:int)
-    let pieceSize = height / 3
+let draw (h:int) (w:int) (s:state) =
+    let C = Canvas.create (w:int) (h:int)
+    let pieceSize = h / 3
     for i in s do
         let fstCoordinate = snd i |> fun (x,y)->(x*pieceSize,y*pieceSize)
         let sndCoordinate = fstCoordinate |> fun (x,y)-> (x+pieceSize,y+pieceSize)
@@ -30,6 +30,5 @@ let react (s:state) (k:Canvas.key) : (state option) =
         Some state    
     | _ -> None
 
-let windowSize = 600
 
-do Canvas.runApp "2048" windowSize windowSize draw react (addRandom Red []|> fun (Some x) -> x)
+do Canvas.runApp "2048" 600 600 draw react (addRandom Blue (addRandom Red []|> fun (Some x) -> x)|> fun (Some x) -> x)
