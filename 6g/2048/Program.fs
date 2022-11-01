@@ -101,17 +101,11 @@ let empty (s:state) : (pos list) =
 let addRandom (color:value) (s:state) : state option =
     let emptySlots = empty s
     if emptySlots.Length > 0 then
-<<<<<<< HEAD
-        printfn "emptySlots = %A" emptySlots
         let rnd = Random().Next(0, emptySlots.Length)
-        printfn "rnd = %A" rnd
-=======
-        let rnd = Random().Next(0, emptySlots.Length)
->>>>>>> a060e030e5c695820e6eb4848568acb10aa8c0c4
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 
-
+let blindAdd (color:value) (s:state) = addRandom color s |> Option.get     
 
 // UNITTEST WOOOO
 let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list)) (name:string) : bool = 
@@ -134,23 +128,7 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
     printfn ""
     allGood
 
-let testSetA = 
-    ([(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,0))], // The starting board
-    [(Green ,(1,0)); (Red ,(1,1)); (Blue ,(0,0)); (Green ,(2,0))],              // Expected result from shiftUp
-    [(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,2))],  // Expected result from flipUD
-    [(Red ,(0,1)); (Red ,(1,1)); (Red ,(2,1)); (Blue ,(1,0)); (Green ,(0,2))],  // Expected result from transpose
-    [(0,0);(0,2);(2,1);(2,2)])                                                  // Expected result from empty
 
-let testSetEmpty = 
-    ([],                                                        // The starting board
-    [],                                                         // Expected result from shiftUp
-    [],                                                         // Expected result from flipUD
-    [],                                                         // Expected result from transpose
-    [(0,0);(0,1);(0,2);(1,0);(1,1);(1,2);(2,0);(2,1);(2,2)])    // Expected result from empty
-
-let a = unitTest testSetA "testSetA"
-let b = unitTest testSetEmpty "Empty set"
-printfn "ALL SETS COMPLETED SUCCESSFULLY:.. %b" <| (a=b)
 (*
 let out = fromValue (nextColor Red)
 let fi = filter 0 testList

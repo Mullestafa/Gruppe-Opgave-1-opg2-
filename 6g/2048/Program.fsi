@@ -58,3 +58,7 @@ val transpose : state -> state
 /// <returns>Some list of empty places not taken up by element in the input state, or None if there are no empty places</returns>
 val empty : state -> pos list
 val addRandom : value -> state -> state option
+
+val blindAdd : value -> state -> state
+
+val unitTest : (state * state * state * state * pos list) -> string -> bool
