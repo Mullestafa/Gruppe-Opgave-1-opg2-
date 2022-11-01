@@ -76,18 +76,22 @@ let rec shiftUp (s:state) : state =
 
 
 
-let flipUD (s:state) : state = List.map (fun (col,(x,y)) -> (col,(x,2-y))) s
+let flipUD (s:state) : state = 
+    List.map (fun (col,(x,y)) -> (col,(x,2-y))) s
     //(i,j) -> (2 -i,j), e.g.
 
-let transpose (s:state) : state =
+let rec transpose (s:state) : state =
+    List.map (fun (col,(x,y)) -> (col,(y,x))) s
+    // Håber det er ok at jeg bare kopierede flipUD funktionen herned. Det er simplere
+    (*
     let rec loopThroughState (s:state) : state =
         match s with
         | (value,(x,y))::rest -> [(value,(y,x))] @ (loopThroughState rest)
         | [] -> []
     loopThroughState s
+    *)
 
-//transpose test:
-//transpose [(Red ,(1,0)); (Red ,(1,1)); (Blue ,(0,2)); (Black ,(2,1)); (Red ,(2,0)); (Red ,(0,1)); (Red ,(1,2))] |> printfn "%A"
+
 
 let empty (s:state) : (pos list) = 
     let posList = List.map (fun i -> snd i) s
@@ -97,24 +101,62 @@ let empty (s:state) : (pos list) =
 let addRandom (color:value) (s:state) : state option =
     let emptySlots = empty s
     if emptySlots.Length > 0 then
-        let rnd = Random().Next(0, emptySlots.Length+1)
+        printfn "emptySlots = %A" emptySlots
+        let rnd = Random().Next(0, emptySlots.Length)
+        printfn "rnd = %A" rnd
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 
-// val addRandom : value -> state -> state option
-//let hejsa = Canvas.Item("r")
 
 
-let testlist = [(Red ,(1,0)); (Red ,(1,1)); (Blue ,(0,2)); (Black ,(2,1)); (Red ,(2,0)); (Red ,(0,1)); (Red ,(1,2))]
+// UNITTEST WOOOO
+let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list)) (name:string) : bool = 
+    let testList = testList
+    let testSet = Set.ofList testList
+
+    let shiftUptest= (testList |> shiftUp |> Set.ofList = (Set.ofList expShiftUptest))
+    printfn "shiftUp delivers expected results: %A" shiftUptest
+
+    let flipUDtest= (testList |> flipUD |> Set.ofList = (Set.ofList expFlipUDtest))
+    printfn "flipUD delivers expected results: %A" flipUDtest
+
+    let transposeTest= (testList |> transpose |> Set.ofList = (Set.ofList expTransposetest))
+    printfn "transpose delivers expected results: %A" transposeTest
+
+    let emptyTest= (testList |> empty |> Set.ofList = (Set.ofList expEmptytest))
+    printfn "empty delivers expected results: %A" emptyTest
+    let allGood = (shiftUptest=flipUDtest=transposeTest=emptyTest) 
+    allGood |> printfn "All tests from %s delivered as expected:... %b" name
+    printfn ""
+    allGood
+
+let testSetA = 
+    ([(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,0))], // The starting board
+    [(Green ,(1,0)); (Red ,(1,1)); (Blue ,(0,0)); (Green ,(2,0))],              // Expected result from shiftUp
+    [(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,2))],  // Expected result from flipUD
+    [(Red ,(0,1)); (Red ,(1,1)); (Red ,(2,1)); (Blue ,(1,0)); (Green ,(0,2))],  // Expected result from transpose
+    [(0,0);(0,2);(2,1);(2,2)])                                                  // Expected result from empty
+
+let testSetEmpty = 
+    ([],                                                        // The starting board
+    [],                                                         // Expected result from shiftUp
+    [],                                                         // Expected result from flipUD
+    [],                                                         // Expected result from transpose
+    [(0,0);(0,1);(0,2);(1,0);(1,1);(1,2);(2,0);(2,1);(2,2)])    // Expected result from empty
+
+let a = unitTest testSetA "testSetA"
+let b = unitTest testSetEmpty "Empty set"
+printfn "ALL SETS COMPLETED SUCCESSFULLY:.. %b" <| (a=b)
+(*
 let out = fromValue (nextColor Red)
-let fi = filter 0 testlist
-let shu = shiftUp testlist
+let fi = filter 0 testList
+let shu = shiftUp testList
 
-addRandom Yellow testlist |> printfn "%A"
-let flipped = flipUD testlist
-printfn "liste er %A" testlist
+
+let flipped = flipUD testList
+printfn "liste er %A" testList
 printfn "flippedlist er %A" flipped
 
 
-
-
+*)
+//addRandom Yellow testList |> printfn "%A"
