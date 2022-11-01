@@ -1,5 +1,5 @@
 ﻿module Game
-
+open System
 
 
 type pos = int*int
@@ -78,20 +78,41 @@ let rec shiftUp (s:state) : state =
 
 let flipUD (s:state) : state =
     //(i,j) -> (2 -i,j), e.g.
-
-let transpose (s:state) : state =
-
 *)
 
+let transpose (s:state) : state =
+    let rec loopThroughState (s:state) : state =
+        match s with
+        | (value,(x,y))::rest -> [(value,(y,x))] @ (loopThroughState rest)
+        | [] -> []
+    loopThroughState s
 
-// val empty : state -> pos list
+//transpose test:
+//transpose [(Red ,(1,0)); (Red ,(1,1)); (Blue ,(0,2)); (Black ,(2,1)); (Red ,(2,0)); (Red ,(0,1)); (Red ,(1,2))] |> printfn "%A"
+
+let empty (s:state) : (pos list) = 
+    let posList = List.map (fun i -> snd i) s
+    let refList = List.concat (List.map (fun i -> List.map (fun j -> (i,j)) [0..2]) [0..2])
+    List.except posList refList
+
+let addRandom (color:value) (s:state) : state option =
+    let emptySlots = empty s
+    if emptySlots.Length > 0 then
+        let rnd = Random().Next(0, emptySlots.Length+1)
+        Some ([(color, emptySlots[rnd])] @ s)
+    else None
+
 // val addRandom : value -> state -> state option
 //let hejsa = Canvas.Item("r")
+
+
 let testlist = [(Red ,(1,0)); (Red ,(1,1)); (Blue ,(0,2)); (Black ,(2,1)); (Red ,(2,0)); (Red ,(0,1)); (Red ,(1,2))]
 let out = fromValue (nextColor Red)
 let fi = filter 0 testlist
 let shu = shiftUp testlist
 
-printfn "%A" shu
+addRandom Yellow testlist |> printfn "%A"
+
+
 
 

@@ -2,42 +2,6 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "DIKU.Canvas/1.0.1": {
-        "type": "package",
-        "dependencies": {
-          "FSharp.Core": "6.0.1",
-          "StbImageSharp": "2.27.11",
-          "StbImageWriteSharp": "1.16.7"
-        },
-        "compile": {
-          "lib/net6.0/canvas.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/canvas.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/linux-x64/native/libSDL2.so": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/osx-arm64/native/libSDL2.dylib": {
-            "assetType": "native",
-            "rid": "osx-arm64"
-          },
-          "runtimes/osx-x64/native/libSDL2.dylib": {
-            "assetType": "native",
-            "rid": "osx-x64"
-          },
-          "runtimes/win-x64/native/SDL2.dll": {
-            "assetType": "native",
-            "rid": "win-x64"
-          },
-          "runtimes/win-x86/native/SDL2.dll": {
-            "assetType": "native",
-            "rid": "win-x86"
-          }
-        }
-      },
       "FSharp.Core/6.0.5": {
         "type": "package",
         "compile": {
@@ -98,48 +62,10 @@
             "copyToOutput": false
           }
         }
-      },
-      "StbImageSharp/2.27.11": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/StbImageSharp.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/StbImageSharp.dll": {}
-        }
-      },
-      "StbImageWriteSharp/1.16.7": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/StbImageWriteSharp.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/StbImageWriteSharp.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "DIKU.Canvas/1.0.1": {
-      "sha512": "zKX4YzBSehun3y9Srfkzd/gKwbyFBNps/izPXno2qbo1DvN5ykFvwthMgCa1oRYyYkv/Rkf2tak2yl8ADx16kg==",
-      "type": "package",
-      "path": "diku.canvas/1.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "README-SDL.txt",
-        "README.md",
-        "diku.canvas.1.0.1.nupkg.sha512",
-        "diku.canvas.nuspec",
-        "lib/net6.0/canvas.dll",
-        "runtimes/linux-x64/native/libSDL2.so",
-        "runtimes/osx-arm64/native/libSDL2.dylib",
-        "runtimes/osx-x64/native/libSDL2.dylib",
-        "runtimes/win-x64/native/SDL2.dll",
-        "runtimes/win-x86/native/SDL2.dll"
-      ]
-    },
     "FSharp.Core/6.0.5": {
       "sha512": "Bpqxoh/UUTq7fHd0a1Ndv/ml1BEtwqmpruKzIMaNnNXgdBSZOEA7wQtoXyc+eKwxq4TQrbHpAbM6yaZAzqotvw==",
       "type": "package",
@@ -183,35 +109,10 @@
         "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
       ]
-    },
-    "StbImageSharp/2.27.11": {
-      "sha512": "KGXsx0IG2sNqjgu8w0w118bQmRx8avNxu8SbXKNW7izjrYTXrd5urAscez3qoIfaLeR4NdpxwHkkW/oInTp5Zg==",
-      "type": "package",
-      "path": "stbimagesharp/2.27.11",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/StbImageSharp.dll",
-        "stbimagesharp.2.27.11.nupkg.sha512",
-        "stbimagesharp.nuspec"
-      ]
-    },
-    "StbImageWriteSharp/1.16.7": {
-      "sha512": "NF9kOxi0iS9VunklnRKgOpAWC2knCGKRjdy7RT6XAqYNyb7LQfyPHPdl4l1fJw7TFYKrGQzQOmK1XpBONC2MoA==",
-      "type": "package",
-      "path": "stbimagewritesharp/1.16.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/StbImageWriteSharp.dll",
-        "stbimagewritesharp.1.16.7.nupkg.sha512",
-        "stbimagewritesharp.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DIKU.Canvas >= 1.0.1",
       "FSharp.Core >= 6.0.5"
     ]
   },
@@ -221,11 +122,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+      "projectUniqueName": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj",
       "projectName": "2048",
-      "projectPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+      "projectPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\2048.fsproj",
       "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\obj\\",
+      "outputPath": "C:\\Users\\musta\\Documents\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -248,11 +149,6 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "DIKU.Canvas": {
-            "target": "Package",
-            "version": "[1.0.1, )",
-            "generatePathProperty": true
-          },
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
