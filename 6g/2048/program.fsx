@@ -11,8 +11,24 @@ let draw (height:int) (width:int) (s:state) =
 
 
 let react (s:state) (k:Canvas.key) : (state option) =
-    let state = addRandom Game.Red s // |> fun (Some x) -> x
-    state
+    match Canvas.getKey k with
+    | Canvas.LeftArrow ->
+        let state = transpose s |> shiftUp |> transpose
+        let state = addRandom Game.Red state |> fun (Some x) -> x
+        Some state
+    | Canvas.RightArrow ->
+        let state = transpose s |> flipUD |> shiftUp |> flipUD |> transpose
+        let state = addRandom Game.Red state |> fun (Some x) -> x
+        Some state
+    | Canvas.UpArrow ->
+        let state = s |> shiftUp
+        let state = addRandom Game.Red state |> fun (Some x) -> x
+        Some state
+    | Canvas.DownArrow ->
+        let state = s |> flipUD |> shiftUp |> flipUD
+        let state = addRandom Game.Red state |> fun (Some x) -> x
+        Some state    
+    | _ -> None
 
 let windowSize = 600
 
