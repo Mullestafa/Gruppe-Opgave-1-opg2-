@@ -97,7 +97,7 @@ let empty (s:state) : (pos list) =
 let addRandom (color:value) (s:state) : state option =
     let emptySlots = empty s
     if emptySlots.Length > 0 then
-        let rnd = Random().Next(0, emptySlots.Length+1)
+        let rnd = Random().Next(0, emptySlots.Length)
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 

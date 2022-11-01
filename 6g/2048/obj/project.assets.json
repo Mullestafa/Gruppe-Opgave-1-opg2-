@@ -38,13 +38,17 @@
           }
         }
       },
-      "FSharp.Core/6.0.1": {
+      "FSharp.Core/6.0.5": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/FSharp.Core.dll": {}
+          "lib/netstandard2.1/FSharp.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.1/FSharp.Core.dll": {}
+          "lib/netstandard2.1/FSharp.Core.dll": {
+            "related": ".xml"
+          }
         },
         "resource": {
           "lib/netstandard2.1/cs/FSharp.Core.resources.dll": {
@@ -136,17 +140,17 @@
         "runtimes/win-x86/native/SDL2.dll"
       ]
     },
-    "FSharp.Core/6.0.1": {
-      "sha512": "VrFAiW8dEEekk+0aqlbvMNZzDvYXmgWZwAt68AUBqaWK8RnoEVUNglj66bZzhs4/U63q0EfXlhcEKnH1sTYLjw==",
+    "FSharp.Core/6.0.5": {
+      "sha512": "Bpqxoh/UUTq7fHd0a1Ndv/ml1BEtwqmpruKzIMaNnNXgdBSZOEA7wQtoXyc+eKwxq4TQrbHpAbM6yaZAzqotvw==",
       "type": "package",
-      "path": "fsharp.core/6.0.1",
+      "path": "fsharp.core/6.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "contentFiles/any/netstandard2.0/FSharp.Core.xml",
         "contentFiles/any/netstandard2.1/FSharp.Core.xml",
-        "fsharp.core.6.0.1.nupkg.sha512",
+        "fsharp.core.6.0.5.nupkg.sha512",
         "fsharp.core.nuspec",
         "lib/netstandard2.0/FSharp.Core.dll",
         "lib/netstandard2.0/FSharp.Core.xml",
@@ -208,28 +212,29 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "DIKU.Canvas >= 1.0.1",
-      "FSharp.Core >= 6.0.1"
+      "FSharp.Core >= 6.0.5"
     ]
   },
   "packageFolders": {
-    "/home/jakupl/.nuget/packages/": {}
+    "C:\\Users\\musta\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj",
+      "projectUniqueName": "D:\\Seafile Sync\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
       "projectName": "2048",
-      "projectPath": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/2048.fsproj",
-      "packagesPath": "/home/jakupl/.nuget/packages/",
-      "outputPath": "/home/jakupl/KU/pop/gruppe/Gruppe-Opgave-1-opg2-/6g/2048/obj/",
+      "projectPath": "D:\\Seafile Sync\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\2048.fsproj",
+      "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
+      "outputPath": "D:\\Seafile Sync\\Seafile\\Sync\\PoP\\Assignments\\Gruppe-Opgave-1-opg2-\\6g\\2048\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/jakupl/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files\\dotnet\\sdk\\6.0.400\\FSharp\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -251,7 +256,7 @@
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
-            "version": "[6.0.1, )",
+            "version": "[6.0.5, )",
             "generatePathProperty": true
           }
         },
@@ -261,22 +266,17 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.10, 6.0.10]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.110/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
