@@ -3,7 +3,7 @@
 
 
 type pos = int*int
-type value = Red | Green | Blue | Yellow | Black
+type value = Red | Green | Blue | Yellow | Black | Empty
 type piece = value * pos
 type state = piece list
 
