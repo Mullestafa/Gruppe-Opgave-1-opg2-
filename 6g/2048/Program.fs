@@ -74,11 +74,10 @@ let rec shiftUp (s:state) : state =
                 thisColumn @ buildList (column+1) s
     buildList 0 s 
 
-(*
 
-let flipUD (s:state) : state =
+
+let flipUD (s:state) : state = List.map (fun (col,(x,y)) -> (col,(x,2-y))) s
     //(i,j) -> (2 -i,j), e.g.
-*)
 
 let transpose (s:state) : state =
     let rec loopThroughState (s:state) : state =
@@ -112,6 +111,9 @@ let fi = filter 0 testlist
 let shu = shiftUp testlist
 
 addRandom Yellow testlist |> printfn "%A"
+let flipped = flipUD testlist
+printfn "liste er %A" testlist
+printfn "flippedlist er %A" flipped
 
 
 
