@@ -46,4 +46,4 @@ let react (s:state) (k:Canvas.key) : (state option) =
 
 
 
-do Canvas.runApp "2048" 600 600 draw react ([] |> blindAdd Red |> blindAdd Blue)
+do Canvas.runApp "2048" 600 600 draw react ([] |> recklessAdd Red |> recklessAdd Blue)

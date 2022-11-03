@@ -105,7 +105,7 @@ let addRandom (color:value) (s:state) : state option =
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 
-let blindAdd (color:value) (s:state) = addRandom color s |> Option.get     
+let recklessAdd (color:value) (s:state) = addRandom color s |> Option.get     
 
 // UNITTEST WOOOO
 let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list)) (name:string) : bool = 

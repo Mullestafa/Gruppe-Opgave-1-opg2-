@@ -57,8 +57,21 @@ val transpose : state -> state
 /// <param name="state">a state to be checked for empty spaces</param>
 /// <returns>Some list of empty places not taken up by element in the input state, or None if there are no empty places</returns>
 val empty : state -> pos list
+
+/// <summary>
+/// given a state, will return a state with a new tile of specified color added to it.
+/// </summary>
+/// <param name="value">the color of new tile</param>
+/// <param name="state">the starting state to which a tile should be added</param>
+/// <returns>New state with 1+ tiles of specified color.</returns>
 val addRandom : value -> state -> state option
 
-val blindAdd : value -> state -> state
+/// <summary>
+/// The same as "addRandom", but given a state, will return a state with a new tile of specified color added to it.
+/// </summary>
+/// <param name="value">the color of new tile</param>
+/// <param name="state">the starting state to which a tile should be added</param>
+/// <returns>New state with 1+ tiles of specified color.</returns>
+val recklessAdd : value -> state -> state
 
 val unitTest : (state * state * state * state * pos list) -> string -> bool
