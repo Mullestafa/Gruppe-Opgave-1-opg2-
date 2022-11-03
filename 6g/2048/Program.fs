@@ -105,7 +105,13 @@ let addRandom (color:value) (s:state) : state option =
         Some ([(color, emptySlots[rnd])] @ s)
     else None
 
-let recklessAdd (color:value) (s:state) = addRandom color s |> Option.get     
+let recklessAdd (color:value) (s:state) = addRandom color s |> Option.get
+
+let newTileIfMoved (col:value) (a:state) (b:state) : state option =
+    if (Set.ofList a) = (Set.ofList b) then
+        None
+    else
+        addRandom col a
 
 // UNITTEST WOOOO
 let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list)) (name:string) : bool = 

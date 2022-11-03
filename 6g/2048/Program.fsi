@@ -63,15 +63,25 @@ val empty : state -> pos list
 /// </summary>
 /// <param name="value">the color of new tile</param>
 /// <param name="state">the starting state to which a tile should be added</param>
-/// <returns>New state with 1+ tiles of specified color.</returns>
+/// <returns>New state option with 1+ tiles of specified color, or None if game was full</returns>
 val addRandom : value -> state -> state option
 
 /// <summary>
 /// The same as "addRandom", but given a state, will return a state with a new tile of specified color added to it.
+/// THIS FUNCTION WILL CRASH if given a full board. Only use this function when empty places are guaranteed.
 /// </summary>
 /// <param name="value">the color of new tile</param>
 /// <param name="state">the starting state to which a tile should be added</param>
 /// <returns>New state with 1+ tiles of specified color.</returns>
 val recklessAdd : value -> state -> state
+
+/// <summary>
+/// Checks if two states contain equivalent tiles.
+/// if not, then adds 
+/// </summary>
+/// <param name="value">the color of new tile</param>
+/// <param name="state">the starting state to which a tile should be added</param>
+/// <returns>New state with 1+ tiles of specified color.</returns>
+val newTileIfMoved : value -> state -> state -> state option
 
 val unitTest : (state * state * state * state * pos list) -> string -> bool

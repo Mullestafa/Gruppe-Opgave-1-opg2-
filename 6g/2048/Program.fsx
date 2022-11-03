@@ -32,16 +32,20 @@ let draw (h:int) (w:int) (s:state) =
 let react (s:state) (k:Canvas.key) : (state option) =
     match Canvas.getKey k with
     | Canvas.LeftArrow ->
-        s |> transpose |> shiftUp |> transpose |> addRandom Red
+        let newstate = s |> transpose |> shiftUp |> transpose
+        newTileIfMoved Red newstate s
 
     | Canvas.RightArrow ->
-        s |> transpose |> flipUD |> shiftUp |> flipUD |> transpose |> addRandom Red
+        let newstate = s |> transpose |> flipUD |> shiftUp |> flipUD |> transpose
+        newTileIfMoved Red newstate s
 
     | Canvas.UpArrow ->
-        s |> shiftUp |> addRandom Red
+        let newstate = s |> shiftUp
+        newTileIfMoved Red newstate s
 
     | Canvas.DownArrow ->
-        s |> flipUD |> shiftUp |> flipUD |> addRandom Red
+        let newstate = s |> flipUD |> shiftUp |> flipUD
+        newTileIfMoved Red newstate s
     | _ -> None
 
 
