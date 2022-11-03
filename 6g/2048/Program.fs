@@ -114,8 +114,8 @@ let newTileIfMoved (col:value) (a:state) (b:state) : state option =
         addRandom col a
 
 // UNITTEST WOOOO
-let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list)) (name:string) : bool = 
-    let testList = testList
+let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list), (expAddRandom:bool)) (name:string) : bool = 
+//    let testList = testList
     let testSet = Set.ofList testList
 
     let shiftUptest= (testList |> shiftUp |> Set.ofList = (Set.ofList expShiftUptest))
@@ -129,7 +129,22 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
 
     let emptyTest= (testList |> empty |> Set.ofList = (Set.ofList expEmptytest))
     printfn "empty delivers expected results: %A" emptyTest
-    let allGood = (shiftUptest=flipUDtest=transposeTest=emptyTest) 
+
+    let addRandomTest : bool =
+        let oneAddedOpt = testList |> addRandom Red
+        match oneAddedOpt with 
+            | None -> if expAddRandom = false then true else false
+            | Some oneAdded ->
+                let oneAddedSet = oneAdded |> Set.ofList
+                let subs : bool = Set.isSubset testSet oneAddedSet // should return true when all elements in testset are in newset
+                let union : bool = (Set.union testSet oneAddedSet) = oneAddedSet
+                let added : bool = (Set.count oneAddedSet - Set.count testSet) = 1 //returns true when there is only one tile added
+                (subs=true&&union=true&&added=true&&expAddRandom=true)
+    printfn "addRandom delivers expected results: %A" addRandomTest
+
+
+
+    let allGood = (shiftUptest=true&&flipUDtest=true&&transposeTest=true&&emptyTest=true&&addRandomTest=true) 
     allGood |> printfn "All tests from %s delivered as expected:... %b" name
     printfn ""
     allGood

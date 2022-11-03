@@ -77,11 +77,18 @@ val recklessAdd : value -> state -> state
 
 /// <summary>
 /// Checks if two states contain equivalent tiles.
-/// if not, then adds 
+/// if not, then adds a tile
 /// </summary>
 /// <param name="value">the color of new tile</param>
 /// <param name="state">the starting state to which a tile should be added</param>
 /// <returns>New state with 1+ tiles of specified color.</returns>
 val newTileIfMoved : value -> state -> state -> state option
 
-val unitTest : (state * state * state * state * pos list) -> string -> bool
+/// <summary>
+/// Checks if two states contain equivalent tiles.
+/// if not, then adds 
+/// </summary>
+/// <param name="value">the color of new tile</param>
+/// <param name="state">the starting state to which a tile should be added</param>
+/// <returns>New state with 1+ tiles of specified color.</returns>
+val unitTest : (state * state * state * state * pos list * bool) -> string -> bool
