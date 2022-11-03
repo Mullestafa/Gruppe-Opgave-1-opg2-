@@ -114,7 +114,7 @@ let newTileIfMoved (col:value) (a:state) (b:state) : state option =
         addRandom col a
 
 // UNITTEST WOOOO
-let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list), (expAddRandom:bool)) (name:string) : bool = 
+let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list), (expAddRandom:bool), (expNextColorValue:Canvas.color option)) (name:string) : bool = 
 //    let testList = testList
     let testSet = Set.ofList testList
 
@@ -142,9 +142,20 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
                 (subs=true&&union=true&&added=true&&expAddRandom=true)
     printfn "addRandom delivers expected results: %A" addRandomTest
 
+    let nextColorValueTest : bool =
+        let sortedlist = testList |> List.sortBy (fun (_,(x,_)) -> x) 
+                                    |> List.sortBy (fun (_,(_,y)) -> y)
+        match sortedlist with
+            | (thiscol,position)::tail -> 
+                let colorvalue:Canvas.color = thiscol |> nextColor |> fromValue
+                printfn "color is %A" thiscol
+                printfn "position is %A" position
+                (Some colorvalue = expNextColorValue)
+            | _ -> (expNextColorValue = None)
 
 
-    let allGood = (shiftUptest=true&&flipUDtest=true&&transposeTest=true&&emptyTest=true&&addRandomTest=true) 
+
+    let allGood = (shiftUptest=true&&flipUDtest=true&&transposeTest=true&&emptyTest=true&&addRandomTest=true&&nextColorValueTest=true) 
     allGood |> printfn "All tests from %s delivered as expected:... %b" name
     printfn ""
     allGood

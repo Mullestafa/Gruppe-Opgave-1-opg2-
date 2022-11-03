@@ -6,15 +6,16 @@ let testSetA =
     [(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,2))],  // Expected result from flipUD
     [(Red ,(0,1)); (Red ,(1,1)); (Red ,(2,1)); (Blue ,(1,0)); (Green ,(0,2))],  // Expected result from transpose
     [(0,0);(0,2);(2,1);(2,2)],                                                  // Expected result from empty
-    true)                                                                     // Expected result from addRandom. true means new tile was created
-
+    true,                                                                     // Expected result from addRandom. true means new tile was created
+    Some Canvas.green)
 let testSetEmpty = 
     ([],                                                        // The starting board
     [],                                                         // Expected result from shiftUp
     [],                                                         // Expected result from flipUD
     [],                                                         // Expected result from transpose
     [(0,0);(0,1);(0,2);(1,0);(1,1);(1,2);(2,0);(2,1);(2,2)],    // Expected result from empty
-    true)
+    true,
+    None)
 
 let testSetFull =
     ([(Red ,(0,0)); (Yellow, (1,0)); (Green, (2,0)); (Green, (0,1)); (Black, (1,1)); (Red, (2,1)); (Blue, (0,2)); (Black, (1,2)); (Red, (2,2))],
@@ -22,7 +23,8 @@ let testSetFull =
     [(Red ,(0,2)); (Yellow, (1,2)); (Green, (2,2)); (Green, (0,1)); (Black, (1,1)); (Red, (2,1)); (Blue, (0,0)); (Black, (1,0)); (Red, (2,0))],
     [(Red ,(0,0)); (Yellow, (0,1)); (Green, (0,2)); (Green, (1,0)); (Black, (1,1)); (Red, (1,2)); (Blue, (2,0)); (Black, (2,1)); (Red, (2,2))],
     [],
-    false)
+    false,
+    Some Canvas.green)
 
 let a = unitTest testSetA "testSetA"
 let b = unitTest testSetEmpty "Empty set"
