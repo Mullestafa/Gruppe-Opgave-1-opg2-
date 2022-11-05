@@ -1,5 +1,7 @@
 open Game
 
+//----------------------------------------------------------------
+// ------------------  Perform Unittest!  ------------------------
 let testSetA = 
     ([(Red ,(1,0)); (Red ,(1,1)); (Red ,(1,2)); (Blue ,(0,1)); (Green ,(2,0))], // The starting board
     [(Green ,(1,0)); (Red ,(1,1)); (Blue ,(0,0)); (Green ,(2,0))],              // Expected result from shiftUp
@@ -8,6 +10,7 @@ let testSetA =
     [(0,0);(0,2);(2,1);(2,2)],                                                  // Expected result from empty
     true,                                                                     // Expected result from addRandom. true means new tile was created
     Some Canvas.green)
+
 let testSetEmpty = 
     ([],                                                        // The starting board
     [],                                                         // Expected result from shiftUp
@@ -31,6 +34,8 @@ let b = unitTest testSetEmpty "Empty set"
 let c = unitTest testSetFull "Full set"
 printfn "ALL SETS COMPLETED SUCCESSFULLY:.. %b" <| (a=true&&b=true&&c=true)
 
+//----------------------------------------------------------------
+//----------------------  Start actual game  ---------------------
 
 let draw (h:int) (w:int) (s:state) =
     let C = Canvas.create (w:int) (h:int)

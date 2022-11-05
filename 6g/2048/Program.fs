@@ -23,8 +23,6 @@ let nextColor (v:value) : value =
     | Blue -> Yellow
     | Yellow -> Black
     | Black -> Black
-    //let colorDict = dict[Red, 2; Green, 4; Blue, 8; Yellow, 16; Black, 32]
-    //ideen er at finde værdien til value, at gange med 2 og så finde farven til værdien
 
 let rec filter (n:int) (s:state) : state =
     match s with
@@ -54,7 +52,9 @@ let rec shiftUp (s:state) : state =
     let rec mergeTiles (s:state) : state =
         match s with
         | s when s.Length = 1 -> s 
-        | elem::rest -> if (fst elem) = (fst rest.Head) then [(nextColor (fst elem),snd elem)] @ rest.Tail else [elem] @ (mergeTiles rest)
+        | elem::rest -> if (fst elem) = (fst rest.Head) then 
+                            [(nextColor (fst elem),snd elem)] 
+                                @ rest.Tail else [elem] @ (mergeTiles rest)
         | [] -> []
 
     let rec shoveTiles (n:int) (s:state)  : state =
@@ -82,14 +82,6 @@ let flipUD (s:state) : state =
 
 let rec transpose (s:state) : state =
     List.map (fun (col,(x,y)) -> (col,(y,x))) s
-    // Håber det er ok at jeg bare kopierede flipUD funktionen herned. Det er simplere
-    (*
-    let rec loopThroughState (s:state) : state =
-        match s with
-        | (value,(x,y))::rest -> [(value,(y,x))] @ (loopThroughState rest)
-        | [] -> []
-    loopThroughState s
-    *)
 
 
 
@@ -107,11 +99,11 @@ let addRandom (color:value) (s:state) : state option =
 
 let recklessAdd (color:value) (s:state) = addRandom color s |> Option.get
 
-let newTileIfMoved (col:value) (a:state) (b:state) : state option =
-    if (Set.ofList a) = (Set.ofList b) then
+let newTileIfMoved (col:value) (newState:state) (oldState:state) : state option =
+    if (Set.ofList newState) = (Set.ofList oldState) then
         None
     else
-        addRandom col a
+        addRandom col newState
 
 // UNITTEST WOOOO
 let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (expTransposetest:state), (expEmptytest:pos list), (expAddRandom:bool), (expNextColorValue:Canvas.color option)) (name:string) : bool = 
@@ -139,7 +131,7 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
                 let subs : bool = Set.isSubset testSet oneAddedSet // should return true when all elements in testset are in newset
                 let union : bool = (Set.union testSet oneAddedSet) = oneAddedSet
                 let added : bool = (Set.count oneAddedSet - Set.count testSet) = 1 //returns true when there is only one tile added
-                (subs=true&&union=true&&added=true&&expAddRandom=true)
+                (subs=true && union=true && added=true && expAddRandom=true) // function returns true when all subtests succeeded
     printfn "addRandom delivers expected results: %A" addRandomTest
 
     let nextColorValueTest : bool =
@@ -148,29 +140,19 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
         match sortedlist with
             | (thiscol,position)::tail -> 
                 let colorvalue:Canvas.color = thiscol |> nextColor |> fromValue
-                printfn "color is %A" thiscol
-                printfn "position is %A" position
                 (Some colorvalue = expNextColorValue)
             | _ -> (expNextColorValue = None)
 
 
 
-    let allGood = (shiftUptest=true&&flipUDtest=true&&transposeTest=true&&emptyTest=true&&addRandomTest=true&&nextColorValueTest=true) 
+    let allGood = (shiftUptest=true &&
+                    flipUDtest=true &&
+                    transposeTest=true &&
+                    emptyTest=true &&
+                    addRandomTest=true &&
+                    nextColorValueTest=true) 
     allGood |> printfn "All tests from %s delivered as expected:... %b" name
     printfn ""
     allGood
 
 
-(*
-let out = fromValue (nextColor Red)
-let fi = filter 0 testList
-let shu = shiftUp testList
-
-
-let flipped = flipUD testList
-printfn "liste er %A" testList
-printfn "flippedlist er %A" flipped
-
-
-*)
-//addRandom Yellow testList |> printfn "%A"

@@ -80,8 +80,9 @@ val recklessAdd : value -> state -> state
 /// if not, then adds a tile
 /// </summary>
 /// <param name="value">the color of new tile</param>
-/// <param name="state">the starting state to which a tile should be added</param>
-/// <returns>New state with 1+ tiles of specified color.</returns>
+/// <param name="oldState">the old state</param>
+/// <param name="newState">the neq state</param>
+/// <returns>Some state with a tile added, or None</returns>
 val newTileIfMoved : value -> state -> state -> state option
 
 /// <summary>
