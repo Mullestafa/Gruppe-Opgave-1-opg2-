@@ -151,7 +151,7 @@ let unitTest ((testList:state), (expShiftUptest:state), (expFlipUDtest:state), (
                     emptyTest=true &&
                     addRandomTest=true &&
                     nextColorValueTest=true) 
-    allGood |> printfn "All tests from %s delivered as expected:... %b" name
+    printfn "All tests from %s delivered as expected:... %b" <|| (name, allGood)
     printfn ""
     allGood
 
