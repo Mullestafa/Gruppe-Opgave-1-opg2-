@@ -8,12 +8,10 @@ let mutable last : int option = None
   
 let create (n:int) : unit =
     queue <- Array.zeroCreate n
-    first <- Some 0
-    last <- Some 0
 
 let iterate i:int option =
     match i with
-    Some x when x = queue.Length -> Some 0
+    Some x when x = (queue.Length - 1) -> Some 0
     | Some (x: int) -> Some (x+1)
     | None -> None
 

@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="CyclicQueue.fsi" />	
-    <Compile Include="CyclicQueue.fs" />
+    <Compile Include="CyclicQueue.fsi" />
     <Compile Include="CyclicQueueApp.fs" />
+    <Compile Include="CyclicQueue.fs" />
   </ItemGroup>
-
 </Project>
