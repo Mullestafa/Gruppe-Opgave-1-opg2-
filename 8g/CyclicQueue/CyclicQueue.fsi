@@ -6,7 +6,12 @@ type Value = int
 /// <param name="n">The maximum number of elements</param>
 val create: n: int -> unit
 
-/// <summary>Add an element to the end of a queue</summary>
+/// <summary>Iterate pointers i a cyclical fashon</summary>
+/// <param name="i">The int option to iterate</param>
+/// <returns>The interated int option or None</returns>
+val iterate: i: int option -> int option
+
+/// <summary>Add an element to the end of a qddueue</summary>
 /// <param name="e">an element</param>
 /// <returns>True if the queue had space for the element</returns>
 val enqueue: e: Value -> bool

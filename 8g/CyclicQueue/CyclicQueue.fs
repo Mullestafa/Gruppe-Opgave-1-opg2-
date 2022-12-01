@@ -7,7 +7,10 @@ let mutable first : int option = None
 let mutable last : int option = None
   
 let create (n:int) : unit =
-    queue <- Array.zeroCreate n
+    try
+        queue <- Array.zeroCreate n
+    with _ -> 
+        eprintfn "Please pass positive integer as argument"
 
 let iterate i:int option =
     match i with
@@ -15,18 +18,21 @@ let iterate i:int option =
     | Some (x: int) -> Some (x+1)
     | None -> None
 
-let isfull: bool =
-    match last with
-    Some x when iterate (Some x) = first -> true
-    | _ -> false
-
 let enqueue (e:Value) : bool =
+    let isfull: bool =
+        match last with
+        Some x when iterate (Some x) = first -> true
+        | _ -> false
+
     match last with
     None -> 
-        queue[0] <- Some e
-        last <- Some 0
-        first <- Some 0
-        true
+        match queue with
+            [||] -> false
+            | _ ->
+                queue[0] <- Some e
+                last <- Some 0
+                first <- Some 0
+                true
     | _ ->
         if isfull then
             false
