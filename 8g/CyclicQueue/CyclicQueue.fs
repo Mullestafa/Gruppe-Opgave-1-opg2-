@@ -73,16 +73,18 @@ let length () : int =
         else
             (x+1) + (queue.Length-first.Value+1)
 
-let classicQue () : Value option[] =
-    match last with
-    None -> [||]
-    | Some x -> 
-        if last.Value > first.Value then
-            queue[first.Value..last.Value]
-        else
-            Array.append queue[first.Value..(queue.Length-1)] queue[0..last.Value]
+
 
 let toString () : string =
+    let classicQue () : Value option[] =
+        match last with
+        None -> [||]
+        | Some x -> 
+            if last.Value > first.Value then
+                queue[first.Value..last.Value]
+            else
+                Array.append queue[first.Value..(queue.Length-1)] queue[0..last.Value]
+
     let filteredArr: Value option[] = classicQue()
     let stringArr: string[] = Array.map (fun (i:Value option) -> string(i.Value)) filteredArr
     let strArr: string = Array.fold (fun (acc: string) (x: string) -> acc + x + " ") "" stringArr
