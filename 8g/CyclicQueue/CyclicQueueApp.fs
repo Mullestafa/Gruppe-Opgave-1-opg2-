@@ -17,5 +17,7 @@ let main _ =
 
     errorCount <- errorCount + (if List.map (fun i -> enqueue i) [1..10] = [true; true; true; true; true; true; true; true; true; true] then 0 else 1) // testing repopulating a reinitialized test
     
+    errorCount <- errorCount + (if toString() = "1 2 3 4 5 6 7 8 9 10" then 0 else 1)
+
     printfn "error count: %A" errorCount
     errorCount
