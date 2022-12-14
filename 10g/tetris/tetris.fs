@@ -9,13 +9,22 @@ type Color =
     | Green
     | Purple
 
+let toCanvasColor(c:Color) : Canvas.color =
+    match c with
+    | Yellow -> Canvas.yellow
+    | Blue -> Canvas.blue
+    | Cyan -> Canvas.fromRgb(0,255,255)
+    | Orange -> Canvas.fromRgb(255,165,0)
+    | Red -> Canvas.red
+    | Green -> Canvas.green
+    | Purple -> Canvas.fromRgb(128,0,128)
+
 type board (w:int, h: int) =
     let _board = Array2D.create w h None
-    do _board .[0 ,1] <- Some Green
+    do _board.[0 ,1] <- Some Green
     member this.width = w
     member this.height = h
     member this.board with get() = _board
-    type state = board
 
 
 //work in progress
@@ -23,15 +32,8 @@ let draw (w:int) (h:int) (b:board) : Canvas.canvas =
     let C = Canvas.create w h
     let PieceWidth = w / b.width
     let PieceHight = h / b.height
-    Array2D.iter () (b.board())
+    //loop through the board and draw a square on some
+    Array2D.iteri (fun (i: int) (j: int) (v: Color option) -> match v with None -> None |> ignore | Some (x: Color) -> (Canvas.setFillBox C (toCanvasColor(x)) ((PieceWidth*i),(PieceHight*j)) ((PieceWidth*i+PieceWidth),(PieceHight*j+PieceHight)))) (b.board)
 
-    for column in [0..(b.width-1)] do
-        for row in [0..(b.height-1)] do
-            match ((b.board())[column][row]) with
-            | None -> ignore
-            | Some x ->
-                Canvas.setFillBox C x (PieceWidth*row) (PieceHight*column)
+    C
 
-let b = board(10, 20)
-let C = draw 300 600 b
-show C "testing"

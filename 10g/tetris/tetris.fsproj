@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DIKU.Canvas" Version="1.0.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <Compile Include="tetris.fsi" />
     <Compile Include="tetris.fs" />
     <Compile Include="tetrisApp.fsx" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DIKU.Canvas" Version="1.0.1" />
-  </ItemGroup>
+
 </Project>
