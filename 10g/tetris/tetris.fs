@@ -31,15 +31,8 @@ type board (w:int, h: int) =
 [<Abstract>]
 type Tetromino (a:bool[,], c:Color, o: Position, r:float) =
     let mutable _position = o
-<<<<<<< HEAD
     let mutable _shape = a
     let mutable _color = c
-=======
-    let _shape = a
-    let _color = c
-    let mutable _rotation = 0
->>>>>>> parent of b216cd5 (Update tetris.fs)
-
 
     member this.offset with get() = _position and set(p) = _position <- p
     member this.image with get() = _shape and set(s) = _shape <- s
@@ -70,60 +63,55 @@ type Tetromino (a:bool[,], c:Color, o: Position, r:float) =
     abstract member move : uint -> uint
     default this.move() = this.offset <- ((fst offset), ((snd offset)+1))
 
-<<<<<<< HEAD
+type S() =
+    let shape = [[false; true; true]
+                [true; true; false]]
+    let col = Green
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
+type Z() =
+    let shape = [[true; true; false]
+                [false; true; true]]
+    let col = Red
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
-=======
-    type S() =
-        let shape = [[false; true; true]
-                    [true; true; false]]
-        let col = Green
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+type T() =
+    let shape = [[true; true; true]
+                [false; true; false]]
+    let col = Purple
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
-    type Z() =
-        let shape = [[true; true; false]
-                    [false; true; true]]
-        let col = Red
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
-    
-    type T() =
-        let shape = [[true; true; true]
-                    [false; true; false]]
-        let col = Purple
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
-    
-    type L() =
-        let shape = [[true; false]
-                    [true; false]
-                    [true; true]]
-        let col = Orange
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+type L() =
+    let shape = [[true; false]
+                [true; false]
+                [true; true]]
+    let col = Orange
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
-    type J() =
-        let shape = [[false; true]
-                    [false; true]
-                    [true; true]]
-        let col = Blue
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+type J() =
+    let shape = [[false; true]
+                [false; true]
+                [true; true]]
+    let col = Blue
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
-    type O() =
-        let shape = [[true; true; false]
-                    [true; true; false]]
-        let col = Yellow
-        let position = (0, 0)
-        inherit Tetromino (shape, position)    
+type O() =
+    let shape = [[true; true; false]
+                [true; true; false]]
+    let col = Yellow
+    let position = (0, 0)
+    inherit Tetromino (shape, position)    
 
-    type I() =
-        let shape = [true; true; true; true]
-        let col = Cyan
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
->>>>>>> parent of b216cd5 (Update tetris.fs)
+type I() =
+    let shape = [true; true; true; true]
+    let col = Cyan
+    let position = (0, 0)
+    inherit Tetromino (shape, position)
 
 let draw (w:int) (h:int) (b:board) : Canvas.canvas =
     let C = Canvas.create w h
