@@ -23,84 +23,107 @@ let toCanvasColor(c:Color) : Canvas.color =
 
 type board (w:int, h: int) =
     let _board = Array2D.create w h None
-    let mutable _score = 0
     do _board.[0 ,1] <- Some Green
-    member this.score 
-        with get() = _score
-        and set(a) = _score <- _score + a
     member this.width = w
     member this.height = h
     member this.board with get() = _board
 
 [<Abstract>]
-type Tetromino (a:bool[,], c:Color, o: Position) =
+type Tetromino (a:bool[,], c:Color, o: Position, r:float) =
     let mutable _position = o
-    let _image = a
+<<<<<<< HEAD
+    let mutable _shape = a
+    let mutable _color = c
+=======
+    let _shape = a
     let _color = c
     let mutable _rotation = 0
+>>>>>>> parent of b216cd5 (Update tetris.fs)
 
 
-    member this.position with get() = _position and set(p) = _position <- p
-    member this.shape with get() = _shape
-    member this.col with get() = _color
-    member this.rotation with get() = _rotation and set(a) = _rotation <- o
+    member this.offset with get() = _position and set(p) = _position <- p
+    member this.image with get() = _shape and set(s) = _shape <- s
+    member this.col with get() = _color and set(c) = _color <- c
 
     override ToString() =
-        sprintf "piece at: %d \nwith shape: %A \nwith color: %A\nwith rotation: %A\n-----------------" this.position this.
+        sprintf "piece at: %d \nwith shape: %A \nwith color: %A\nwith rotation: %A\n-----------------" this.offset this.
 
+    member this.clone() : Tetromino =
+        new Tetromino(_shape, _color, _position)
+
+    member this.rotateRight () =
+        let transpose(a:Array2D) =
+            r : Array2D = Array2D.init (a.Length2) (a.Length1) (true)
+            Array2D.iteri (fun i j v -> Array2D.set r j i v) a
+        let flip(a:Array2D) = 
+            r : Array2D = Array2D.init a.Length1 a.Length2 
+            Array2D.iteri (fun i j v -> Array2D.set r i (a.Length2-j) v) a
+        
+        this.image <- flip(transpose(this.image))
     
-    abstract member move : uint -> uint
-    default this.move() = this.position <- ((fst position), ((snd position)+1))
+    member this.height () =
+        this.image.Length1
+    
+    member this.width () =
+        this.image.Length2
 
+    abstract member move : uint -> uint
+    default this.move() = this.offset <- ((fst offset), ((snd offset)+1))
+
+<<<<<<< HEAD
+
+
+=======
     type S() =
-        let image = [[false; true; true]
+        let shape = [[false; true; true]
                     [true; true; false]]
         let col = Green
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
 
     type Z() =
-        let image = [[true; true; false]
+        let shape = [[true; true; false]
                     [false; true; true]]
         let col = Red
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
     
     type T() =
-        let image = [[true; true; true]
+        let shape = [[true; true; true]
                     [false; true; false]]
         let col = Purple
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
     
     type L() =
-        let image = [[true; false]
+        let shape = [[true; false]
                     [true; false]
                     [true; true]]
         let col = Orange
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
 
     type J() =
-        let image = [[false; true]
+        let shape = [[false; true]
                     [false; true]
                     [true; true]]
         let col = Blue
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
 
     type O() =
-        let image = [[true; true; false]
+        let shape = [[true; true; false]
                     [true; true; false]]
         let col = Yellow
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)    
+        let position = (0, 0)
+        inherit Tetromino (shape, position)    
 
     type I() =
-        let image = [true; true; true; true]
+        let shape = [true; true; true; true]
         let col = Cyan
-        let offset = (0, 0)
-        inherit Tetromino (image, offset)
+        let position = (0, 0)
+        inherit Tetromino (shape, position)
+>>>>>>> parent of b216cd5 (Update tetris.fs)
 
 let draw (w:int) (h:int) (b:board) : Canvas.canvas =
     let C = Canvas.create w h
