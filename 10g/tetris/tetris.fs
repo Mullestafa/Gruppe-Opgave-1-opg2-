@@ -9,6 +9,8 @@ type Color =
     | Green
     | Purple
 
+type Position = int*int
+
 let toCanvasColor(c:Color) : Canvas.color =
     match c with
     | Yellow -> Canvas.yellow
@@ -26,8 +28,29 @@ type board (w:int, h: int) =
     member this.height = h
     member this.board with get() = _board
 
+[<Abstract>]
+type Tetromino (a:bool[,], c:Color, o: Position) =
+    let mutable _position = o
+    let _shape = a
+    let _color = c
+    let mutable _rotation = 0
 
-//work in progress
+
+    member this.position with get() = _position and set(p) = _position <- p
+    member this.shape with get() = _shape
+    member this.col with get() = _color
+    member this.rotation with get() = _rotation and set(a) = _rotation <- o
+
+    override ToString() =
+        sprintf "piece at: %d \nwith shape: %A \nwith color: %A\nwith rotation: %A\n-----------------" this.position this.
+
+    
+    abstract member move : uint -> uint
+    default this.move() = this.position <- ((fst position), ((snd position)+1))
+
+
+
+
 let draw (w:int) (h:int) (b:board) : Canvas.canvas =
     let C = Canvas.create w h
     let PieceWidth = w / b.width
