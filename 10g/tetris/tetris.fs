@@ -21,7 +21,11 @@ let toCanvasColor(c:Color) : Canvas.color =
 
 type board (w:int, h: int) =
     let _board = Array2D.create w h None
+    let mutable _score = 0
     do _board.[0 ,1] <- Some Green
+    member this.score 
+        with get() = _score
+        and set(a) = _score <- _score + a
     member this.width = w
     member this.height = h
     member this.board with get() = _board
