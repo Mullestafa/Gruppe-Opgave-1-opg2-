@@ -35,7 +35,7 @@ type board (w:int, h: int) =
 [<Abstract>]
 type Tetromino (a:bool[,], c:Color, o: Position) =
     let mutable _position = o
-    let _shape = a
+    let _image = a
     let _color = c
     let mutable _rotation = 0
 
@@ -53,54 +53,54 @@ type Tetromino (a:bool[,], c:Color, o: Position) =
     default this.move() = this.position <- ((fst position), ((snd position)+1))
 
     type S() =
-        let shape = [[false; true; true]
+        let image = [[false; true; true]
                     [true; true; false]]
         let col = Green
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
 
     type Z() =
-        let shape = [[true; true; false]
+        let image = [[true; true; false]
                     [false; true; true]]
         let col = Red
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
     
     type T() =
-        let shape = [[true; true; true]
+        let image = [[true; true; true]
                     [false; true; false]]
         let col = Purple
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
     
     type L() =
-        let shape = [[true; false]
+        let image = [[true; false]
                     [true; false]
                     [true; true]]
         let col = Orange
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
 
     type J() =
-        let shape = [[false; true]
+        let image = [[false; true]
                     [false; true]
                     [true; true]]
         let col = Blue
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
 
     type O() =
-        let shape = [[true; true; false]
+        let image = [[true; true; false]
                     [true; true; false]]
         let col = Yellow
-        let position = (0, 0)
-        inherit Tetromino (shape, position)    
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)    
 
     type I() =
-        let shape = [true; true; true; true]
+        let image = [true; true; true; true]
         let col = Cyan
-        let position = (0, 0)
-        inherit Tetromino (shape, position)
+        let offset = (0, 0)
+        inherit Tetromino (image, offset)
 
 let draw (w:int) (h:int) (b:board) : Canvas.canvas =
     let C = Canvas.create w h
