@@ -54,10 +54,10 @@ type Tetromino (a:bool[,], c:Color, o: Position) =
         this.image <- flip(transpose(this.image))
     
     member this.height ():int =
-        Array2D.length1 this.image
+        Array2D.length2 this.image
     
     member this.width ():int =
-        Array2D.length2 this.image
+        Array2D.length1 this.image
 
 
 type S() =
@@ -142,8 +142,22 @@ type board (w:int, h: int) =
     member this.setActivePiece (p: Tetromino) = _activePiece <- p
 
     member this.put (t:Tetromino) : bool =
-        Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
-        true
+        let mutable isPlaceable = true
+        try
+            Array2D.iteri (fun i j v -> if v then do if Option.isSome(this.board[(i+(fst t.offset)),(j+(snd t.offset))]) then do isPlaceable <- false ) t.image
+        with exn -> isPlaceable <- false
+        if isPlaceable then
+            Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
+            true
+        else
+            if (fst (this.activePiece.offset) > 5) then 
+                this.activePiece.offset <- ((this.width - this.activePiece.width()), (snd this.activePiece.offset))
+                Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
+                true
+            else
+                this.activePiece.offset <- ((0), (snd this.activePiece.offset))
+                Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
+                true
 
     member this.take () : Tetromino option =
         try
@@ -171,9 +185,13 @@ let draw (w:int) (h:int) (b:board) : Canvas.canvas =
 let react (b:board) (k:Canvas.key) : (board option) =
     match Canvas.getKey k with
     | Canvas.LeftArrow ->
-        None
+        b.take() |> ignore
+        b.activePiece.offset <- (((fst b.activePiece.offset)-1), ((snd b.activePiece.offset)+1))
+        Some b
     | Canvas.RightArrow ->
-        None
+        b.take() |> ignore
+        b.activePiece.offset <- (((fst b.activePiece.offset)+1), ((snd b.activePiece.offset)+1))
+        Some b
     | Canvas.UpArrow ->
         b.take() |> ignore
         b.activePiece.rotateRight()
