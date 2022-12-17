@@ -149,7 +149,7 @@ type board (w:int, h: int) =
         if isPlaceable then
             Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
             true
-        else
+        elif ((snd this.activePiece.offset) > -1) then
             if (fst (this.activePiece.offset) > 5) then 
                 this.activePiece.offset <- ((this.width - this.activePiece.width()), (snd this.activePiece.offset))
                 Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
@@ -158,13 +158,27 @@ type board (w:int, h: int) =
                 this.activePiece.offset <- ((0), (snd this.activePiece.offset))
                 Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
                 true
+        else
+            this.activePiece.offset <- ((fst this.activePiece.offset), (0))
+            Array2D.iteri (fun i j v -> if v then do try this.board[(i+(fst t.offset)),(j+(snd t.offset))] <- (Some t.col) with exn -> 1|>ignore) t.image
+            true
 
     member this.take () : Tetromino option =
         try
             Array2D.iteri (fun i j v -> if v then do this.board[(i+(fst this.activePiece.offset)),(j+(snd this.activePiece.offset))] <- None) this.activePiece.image  
             Some this.activePiece
-        with _->
+        with exn->
             None
+    
+    member this.checkIfPieceFallen () : bool = 
+        if ((fst this.activePiece.offset) < 0) then this.activePiece.offset <- ((0),(snd this.activePiece.offset))
+        elif ((fst this.activePiece.offset) > (this.width - this.activePiece.width())) then this.activePiece.offset <- ((this.width - this.activePiece.width()),(snd this.activePiece.offset))
+        let mutable isPlaceable = true
+        if ((snd this.activePiece.offset) = (this.height-(this.activePiece.height()))) then isPlaceable <- false; printfn "fallen?: %A" (not(isPlaceable))
+        else
+            Array2D.iteri (fun i j v -> if v then do if Option.isSome(this.board[(i+(fst this.activePiece.offset)),(1+j+(snd this.activePiece.offset))]) then do isPlaceable <- false; printfn "%A %A" i j ) this.activePiece.image
+            printfn "fallen?: %A" (not(isPlaceable))
+        not(isPlaceable)
     //member this.pieces with get() = _pieces and set(p) = _pieces <- [p] :: _pieces
 
     //member this.addToBoard() =
@@ -186,16 +200,38 @@ let react (b:board) (k:Canvas.key) : (board option) =
     match Canvas.getKey k with
     | Canvas.LeftArrow ->
         b.take() |> ignore
-        b.activePiece.offset <- (((fst b.activePiece.offset)-1), ((snd b.activePiece.offset)+1))
-        Some b
+        if b.checkIfPieceFallen() then
+            b.put b.activePiece |> ignore
+            b.setActivePiece (b.newPiece().Value)
+            Some b
+        else
+            b.activePiece.offset <- (((fst b.activePiece.offset)-1), ((snd b.activePiece.offset)+1))
+            Some b
     | Canvas.RightArrow ->
         b.take() |> ignore
-        b.activePiece.offset <- (((fst b.activePiece.offset)+1), ((snd b.activePiece.offset)+1))
-        Some b
+        if b.checkIfPieceFallen() then
+            b.put b.activePiece |> ignore
+            b.setActivePiece (b.newPiece().Value)
+            Some b
+        else
+            b.activePiece.offset <- (((fst b.activePiece.offset)+1), ((snd b.activePiece.offset)+1))
+            Some b
     | Canvas.UpArrow ->
         b.take() |> ignore
-        b.activePiece.rotateRight()
-        Some b
+        if b.checkIfPieceFallen() then
+            b.put b.activePiece |> ignore
+            b.setActivePiece (b.newPiece().Value)
+            Some b
+        else
+            b.activePiece.rotateRight()
+            Some b
     | Canvas.DownArrow ->
-        None
+        b.take() |> ignore
+        if b.checkIfPieceFallen() then
+            b.put b.activePiece |> ignore
+            b.setActivePiece (b.newPiece().Value)
+            Some b
+        else
+            b.activePiece.offset <- (((fst b.activePiece.offset)), ((snd b.activePiece.offset)+1))
+            Some b
     | _ -> None
