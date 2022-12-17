@@ -1,5 +1,7 @@
 ﻿module Tetris
 
+
+
 (* The Color type represents the colors that can be used in the game.*)
 type Color =
     | Yellow
@@ -65,6 +67,11 @@ type Tetromino (a:bool[,], c:Color, o: Position) =
             r
         this.image <- flip(transpose(this.image))
     
+    member this.rotateLeft () =
+        this.rotateRight()
+        this.rotateRight()
+        this.rotateRight()
+
     (* The height method returns the height of the Tetromino, which is the number of rows in the _shape field. *)
     member this.height ():int =
         Array2D.length2 this.image
@@ -152,8 +159,8 @@ type board (w:int, h: int) =
         if isPlaceable then
             Some newPiece
         else
-            printfn "---------------Game Over---------------"
-            None
+            failwith "---------------Game Over---------------"
+            //None
 
     member this.activePiece with get() = _activePiece
     member this.setActivePiece (p: Tetromino) = _activePiece <- p
@@ -279,6 +286,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.activePiece.rotateRight()
             if (fst b.activePiece.offset) > (b.width-b.activePiece.width()) then b.snapToEgde(b.activePiece)
             elif (fst b.activePiece.offset) < (0) then b.snapToEgde(b.activePiece)
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.rotateLeft()
             b.put b.activePiece |> ignore
             Some b
         else //If it has, it creates a new active piece and places it on the board.
