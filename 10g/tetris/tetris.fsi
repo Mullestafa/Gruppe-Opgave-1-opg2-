@@ -54,7 +54,7 @@ type board =
     /// Put a piece on the board if possible. Returns true if successful
     member put: t: Tetromino -> bool
     /// Take the active piece from the board. Returns a piece or None if no piece is active
-    member take: unit -> Tetromino option
+    member removeFromBoard: unit -> Tetromino option
     /// Return the board
     member board: Color option[,]
     /// The number of fields on the board vertically
