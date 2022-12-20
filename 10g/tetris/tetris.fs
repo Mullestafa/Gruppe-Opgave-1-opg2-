@@ -141,6 +141,7 @@ let listOfPiecesTypes: Tetromino list = [S(); T(); Z(); L(); J(); O(); I()]
 
 
 type board (w:int, h: int) =
+    static let mutable score = -1
     let _board: Color option[,] = Array2D.create w h None
     let mutable _activePiece: Tetromino = listOfPiecesTypes[randomNumber()].clone()
     member this.width = w
