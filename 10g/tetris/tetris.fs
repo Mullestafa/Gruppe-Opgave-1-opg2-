@@ -141,6 +141,7 @@ let listOfPiecesTypes: Tetromino list = [S(); T(); Z(); L(); J(); O(); I()]
 
 
 type board (w:int, h: int) =
+    static let mutable score = -1
     let _board = Array2D.create w h None
     let mutable _activePiece: Tetromino = T()
     member this.width = w
@@ -157,6 +158,8 @@ type board (w:int, h: int) =
         let newPiece: Tetromino = listOfPiecesTypes[randomNumber()].clone()
         Array2D.iteri (fun i j v -> if v then do if Option.isSome(this.board[(i+(fst newPiece.offset)),(j+(snd newPiece.offset))]) then do isPlaceable <- false ) newPiece.image
         if isPlaceable then
+            score <- score + 1
+            printfn "Score: %A" score
             Some newPiece
         else
             failwith "---------------Game Over---------------"
@@ -277,7 +280,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.put b.activePiece |> ignore
             Some b
 
-    | Canvas.UpArrow ->
+    | Canvas.Space | Canvas.UpArrow ->
         b.removeFromBoard() |> ignore // first removes the active piece from the board.
 
         (*checks if the piece has reached the bottom of the board or if it has collided with another piece.*)
