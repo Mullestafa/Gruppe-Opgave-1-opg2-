@@ -156,7 +156,13 @@ type board (w:int, h: int) =
     member this.newPiece () : Tetromino option =
         let mutable isPlaceable = true
         let newPiece: Tetromino = listOfPiecesTypes[randomNumber()].clone()
-        Array2D.iteri (fun i j v -> if v then do if Option.isSome(this.board[(i+(fst newPiece.offset)),(j+(snd newPiece.offset))]) then do isPlaceable <- false ) newPiece.image
+        let (newpI, newpJ) = newPiece.offset
+
+        let iteriFunc i j v =
+            if v && Option.isSome (this.board[(i+newpI),(j+newpJ)]) then
+                isPlaceable <- false
+        Array2D.iteri iteriFunc newPiece.image
+
         if isPlaceable then
             score <- score + 1
             printfn "Score: %A" score
