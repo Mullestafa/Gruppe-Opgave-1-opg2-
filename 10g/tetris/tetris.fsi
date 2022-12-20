@@ -114,20 +114,52 @@ type board =
     /// <param name="t">The Tetromino to place on the board.</param>
     /// <returns>True if the Tetromino was successfully placed on the board, or False otherwise.</returns>
     member put: t: Tetromino -> bool
-    
-    /// Take the active piece from the board. Returns a piece or None if no piece is active
+
+    /// <summary>
+    /// Takes the active piece from the board. Returns a piece or None if no piece is active.
+    /// </summary>
+    /// <returns>The active piece if one exists, or None if no piece is active.</returns>
     member removeFromBoard: unit -> Tetromino option
-    /// Return the board
+
+    /// <summary>
+    /// Returns the board.
+    /// </summary>
     member board: Color option[,]
-    /// The number of fields on the board vertically
+
+    /// <summary>
+    /// The number of fields on the board vertically.
+    /// </summary>
     member height: int
-    /// The number of fields on the board horizontally
+
+    /// <summary>
+    /// The number of fields on the board horizontally.
+    /// </summary>
     member width: int
-    // get an instance oF the active peice
+
+    /// <summary>
+    /// Gets an instance of the active piece.
+    /// </summary>
     member activePiece: Tetromino
-    // sets the active peice
+
+    /// <summary>
+    /// Sets the active piece.
+    /// </summary>
+    /// <param name="t">The Tetromino to set as the active piece.</param>
     member setActivePiece : Tetromino -> unit
 
+/// <summary>
+/// Draws the Tetris board on a canvas.
+/// </summary>
+/// <param name="w">The width of the canvas.</param>
+/// <param name="h">The height of the canvas.</param>
+/// <param name="b">The Tetris board to draw.</param>
+/// <returns>A canvas with the Tetris board drawn on it.</returns>
 val draw : w:int -> h:int -> b:board -> Canvas.canvas
 
+/// <summary>
+/// Reacts to a key press in the Tetris game.
+/// </summary>
+/// <param name="b">The current state of the Tetris board.</param>
+/// <param name="k">The key that was pressed.</param>
+/// <returns>The new state of the Tetris board after reacting to the key press, or None if the game is over.</returns>
 val react: b: board -> k: Canvas.key -> board option
