@@ -141,8 +141,8 @@ let listOfPiecesTypes: Tetromino list = [S(); T(); Z(); L(); J(); O(); I()]
 
 
 type board (w:int, h: int) =
-    let _board = Array2D.create w h None
-    let mutable _activePiece: Tetromino = T()
+    let _board: Color option[,] = Array2D.create w h None
+    let mutable _activePiece: Tetromino = listOfPiecesTypes[randomNumber()].clone()
     member this.width = w
     member this.height = h
     member this.board with get() = _board
@@ -155,8 +155,16 @@ type board (w:int, h: int) =
     member this.newPiece () : Tetromino option =
         let mutable isPlaceable = true
         let newPiece: Tetromino = listOfPiecesTypes[randomNumber()].clone()
-        Array2D.iteri (fun i j v -> if v then do if Option.isSome(this.board[(i+(fst newPiece.offset)),(j+(snd newPiece.offset))]) then do isPlaceable <- false ) newPiece.image
+        let (newpI, newpJ) = newPiece.offset
+
+        let iteriFunc i j v =
+            if v && Option.isSome (this.board[(i+newpI),(j+newpJ)]) then
+                isPlaceable <- false
+        Array2D.iteri iteriFunc newPiece.image
+
         if isPlaceable then
+            score <- score + 1
+            printfn "Score: %A" score
             Some newPiece
         else
             failwith "---------------Game Over---------------"
@@ -277,7 +285,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.put b.activePiece |> ignore
             Some b
 
-    | Canvas.UpArrow ->
+    | Canvas.Space | Canvas.UpArrow ->
         b.removeFromBoard() |> ignore // first removes the active piece from the board.
 
         (*checks if the piece has reached the bottom of the board or if it has collided with another piece.*)
@@ -286,7 +294,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.activePiece.rotateRight()
             if (fst b.activePiece.offset) > (b.width-b.activePiece.width()) then b.snapToEgde(b.activePiece)
             elif (fst b.activePiece.offset) < (0) then b.snapToEgde(b.activePiece)
-            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.rotateLeft()
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.rotateLeft(); b.activePiece.offset <- (((fst b.activePiece.offset)), ((snd b.activePiece.offset)-1))
             b.put b.activePiece |> ignore
             Some b
         else //If it has, it creates a new active piece and places it on the board.
