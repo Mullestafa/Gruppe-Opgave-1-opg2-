@@ -239,11 +239,15 @@ type board (w:int, h: int) =
 
 (*gets called every new frame. removes full lines and draws the baord on the canvas*)
 let draw (w:int) (h:int) (b:board) : Canvas.canvas =
+    let drawSquare C c (x1, y1) (x2,y2) =
+        Canvas.setFillBox C c (x1,y1) (x2,y2)
+        Canvas.setBox C Canvas.black (x1,y1) (x2,y2)
+        
     let C = Canvas.create w h
     let PieceWidth = w / b.width
     let PieceHight = h / b.height
     b.removeFullLines()
-    Array2D.iteri (fun (i: int) (j: int) (v: Color option) -> match v with None -> None |> ignore | Some (x: Color) -> (Canvas.setFillBox C (toCanvasColor(x)) ((PieceWidth*i),(PieceHight*j)) ((PieceWidth*i+PieceWidth),(PieceHight*j+PieceHight)))) (b.board)
+    Array2D.iteri (fun (i: int) (j: int) (v: Color option) -> match v with None -> None |> ignore | Some (x: Color) -> (drawSquare C (toCanvasColor(x)) ((PieceWidth*i),(PieceHight*j)) ((PieceWidth*i+PieceWidth),(PieceHight*j+PieceHight)))) (b.board)
     C
 
 (*called when user input is detected. Updates the game*)
