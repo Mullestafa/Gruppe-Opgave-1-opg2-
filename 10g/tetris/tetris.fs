@@ -292,12 +292,16 @@ let react (b:board) (k:Canvas.key) : (board option) =
         (*checks if the piece has reached the bottom of the board or if it has collided with another piece.*)
         if not(b.checkIfPieceIsFallen(b.activePiece)) then //If it has not, it moves the active piece down by one space and places it on the board.
             let mutable originalOffset = b.activePiece.offset
-            b.activePiece.offset <- (((fst b.activePiece.offset)), ((snd b.activePiece.offset)+1))
-            b.activePiece.rotateRight()
-            if (fst b.activePiece.offset) > (b.width-b.activePiece.width()) then b.snapToEgde(b.activePiece)
-            elif (fst b.activePiece.offset) < (0) then b.snapToEgde(b.activePiece)
-            if ((snd b.activePiece.offset)>(b.height-b.activePiece.height())) then b.activePiece.offset <- (((fst b.activePiece.offset)), ((b.height-b.activePiece.height())))
-            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.rotateLeft(); b.activePiece.offset <- originalOffset
+            b.activePiece.rotateRight() // rotates the image
+            if (fst b.activePiece.offset) > (b.width-b.activePiece.width()) then b.snapToEgde(b.activePiece) // snaps to to right edge if out of bounds
+            elif (fst b.activePiece.offset) < (0) then b.snapToEgde(b.activePiece) //snaps to left egde if out of bounds
+            b.activePiece.offset <- (((fst b.activePiece.offset)), ((snd b.activePiece.offset)+1)) 
+            if ((snd b.activePiece.offset)>(b.height-b.activePiece.height())) then b.activePiece.offset <- (((fst b.activePiece.offset)), ((b.height-b.activePiece.height()))) //snap to bottom if out of bounds
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.offset <- ((fst b.activePiece.offset),((snd b.activePiece.offset)-1)) // move up if no space for the rotated piece
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.offset <- (((fst b.activePiece.offset)-1),((snd b.activePiece.offset))) // move left if no space for the rotated piece
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.offset <- (((fst b.activePiece.offset)+2),((snd b.activePiece.offset))) //move right if no space for the rotated piece
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.offset <- (((fst b.activePiece.offset)-1),((snd b.activePiece.offset)-1)) //move up twice if no space for the rotated piece
+            if not(b.checkForNoCollision(b.activePiece.offset)) then b.activePiece.rotateLeft(); b.activePiece.offset <- originalOffset // move back to original place if still no space
             b.put b.activePiece |> ignore
             Some b
         else //If it has, it creates a new active piece and places it on the board.
