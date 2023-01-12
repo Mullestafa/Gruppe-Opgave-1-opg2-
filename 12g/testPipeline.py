@@ -57,7 +57,7 @@ class TestSteps(unittest.TestCase):
 
     def test_CsvReader(self):
         testDataset = steps.CsvReader.apply('critters.csv')
-        self.assertEqual(str(testDataset[0]),"OrderedDict([('Name', 'Poppy'), ('Colour', 'peru'), ('Hit Points', '2')])")
+        self.assertEqual(testDataset[0],{'Name': 'Poppy', 'Colour': 'peru', 'Hit Points': '2'})
         self.assertEqual(steps.CsvReader.description(),"Make csv file into list of dicts")
     
     def test_CritterStats(self):
