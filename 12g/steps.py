@@ -1,4 +1,4 @@
-
+import csv
 # Opgave A
 class AddConst:
     def __init__(self, c):
@@ -51,8 +51,6 @@ class ProductNum(GeneralSum):
     def __init__(self):
         super().__init__(1,"*")
 
-# Opgave C
-
 
 # Opgave B
 class Map:
@@ -62,3 +60,20 @@ class Map:
         return [self.step.apply(i) for i in inp]
     def description(self):
         return f"for every element in input list: {self.step.description()}"
+
+
+# Opgave D
+class CsvReader:
+    def apply(self, file:str):
+        output = []
+        with open(file, newline='') as csvfile:
+            file_reader = csv.DictReader(csvfile)
+            for row in file_reader:
+                output.append(row)
+        return output
+    def description(self):
+        return "Make csv file into list of dicts"
+
+class CritterStats:
+    def apply(self, data:dict):
+        return "hey"
