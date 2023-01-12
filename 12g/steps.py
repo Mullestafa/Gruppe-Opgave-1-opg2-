@@ -158,6 +158,7 @@ class PigLatin:
                 words[i] += "way"
             else:
                 words[i] = words[i][1:] + words[i][0] + "ay"    
+
             ## Handle common punctuation
             punct = ""
             for j in words[i]:
