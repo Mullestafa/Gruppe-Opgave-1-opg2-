@@ -1,6 +1,9 @@
+<<<<<<< HEAD:12g/12g.py
+#Opgave A
+
 =======
 # Opgave A
-
+>>>>>>> 9682a0f9a0f116f445a0b81fe6081c49040c36c6:12g/steps.py
 class AddConst:
     def __init__(self, c):
         self.c = c
@@ -51,13 +54,16 @@ class SumNum(GeneralSum):
 class ProductNum(GeneralSum):
     def __init__(self):
         super().__init__(1,"*")
-
+<<<<<<< HEAD:12g/12g.py
     #def apply(self, inp):
     #    return 
     def description(self) -> str:
         return "give value after accumulating (acc * elm) to each element in input list (starting with acc = {self.n_elm})"
     
+
+# Opgave C
 =======
+>>>>>>> 9682a0f9a0f116f445a0b81fe6081c49040c36c6:12g/steps.py
 
 # Opgave B
 class Map:
@@ -65,26 +71,3 @@ class Map:
         self.step = step
     def apply(self, inp:list):
         [step.apply(i) for i in inp]
-        
-=======
-        
-# Opgave C
-
-class Pipeline:
-    # Takes a list of steps as an argument
-    def _init_(self, step)
-        self.step = step
-    
-    # Adds additional steps to the list of steps
-    def add_step(self, step):
-        self.step.append(step)
-    
-    # Iterates over the list of steps and calls the apply function on every step
-    def apply(self, input_):
-        for self in self.step 
-        input_ = step.apply(input_)
-        return input()
-    
-    # Returns a string that lists the description of each step
-    def description(self):
-        return print(','.join([step.description() for step in self.step]))
