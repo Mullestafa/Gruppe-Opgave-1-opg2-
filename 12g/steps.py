@@ -1,3 +1,4 @@
+# Opgave A
 class AddConst:
     def __init__(self, c):
         self.c = c
@@ -44,16 +45,14 @@ class GeneralSum:
 class SumNum(GeneralSum):
     def __init__(self):
         super().__init__(0,"+")
-    #def apply(self, inp):
-    #    return 
-    def description(self) -> str:
-        return "give value after accumulating (acc + elm) to each element in input list (starting with acc = {self.n_elm})"
 
 class ProductNum(GeneralSum):
     def __init__(self):
         super().__init__(1,"*")
-    #def apply(self, inp):
-    #    return 
-    def description(self) -> str:
-        return "give value after accumulating (acc * elm) to each element in input list (starting with acc = {self.n_elm})"
 
+# Opgave B
+class Map:
+    def __init__(self,step):
+        self.step = step
+    def apply(self, inp:list):
+        [step.apply(i) for i in inp]
