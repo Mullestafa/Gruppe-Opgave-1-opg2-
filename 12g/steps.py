@@ -96,5 +96,37 @@ class CsvReader:
         return "Make csv file into list of dicts"
 
 class CritterStats:
-    def apply(self, data:dict):
-        return "hey"
+    def apply(self, data:list):
+        colourdict = {}
+        for i in data:
+            this_colour = i['Colour']
+            if this_colour in colourdict.keys():
+                colourdict[this_colour] += 1
+            else:
+                colourdict[this_colour] = 1
+        return colourdict
+
+class ShowAsciiBarchart:
+    def apply(self, d:dict):
+        keylist = []
+        maxlen = 0
+        for i in d.keys():
+            if len(i) > maxlen:
+                maxlen = len(i)
+            keylist.append(i)
+
+        for i in keylist:
+            wordlen = len(i)
+            out = ""
+            out += i                        # add color
+            out += (maxlen - wordlen) * ' ' # add whitespace 
+            out += ": "                     # add colon
+            out += '*' * d[i]               # add asterisks
+            print(out)
+
+
+
+
+
+
+
