@@ -1,5 +1,7 @@
 import unittest
 import steps
+import io
+import sys
 
 class TestSteps(unittest.TestCase):
     def test_AddConstant(self):
@@ -52,6 +54,27 @@ class TestSteps(unittest.TestCase):
 
         # test description method
         self.assertEqual(pipeline.description(), "add 5 to input\ngive list containing input 3 times\ngive value after accumulating (acc * elm) to each element in input list (starting with acc = 1)")
+
+    def test_CsvReader(self):
+        testCsvReader = steps.CsvReader()
+        testDataset = testCsvReader.apply('critters.csv')
+        self.assertEqual(str(testDataset[0]),"OrderedDict([('Name', 'Poppy'), ('Colour', 'peru'), ('Hit Points', '2')])")
+        self.assertEqual(testCsvReader.description(),"Make csv file into list of dicts")
+    
+    def test_CritterStats(self):
+        testCsvReader = steps.CsvReader()
+        testDataset = testCsvReader.apply('critters.csv')
+        testCritterStats = steps.CritterStats()
+        self.assertEqual(testCritterStats.apply(testDataset)['peru'], 5)
+
+    def test_ShowAsciiBarchart(self):
+        testShowAsciiBarchart = steps.ShowAsciiBarchart()
+        input_ = {"Red":2, "Green":1}
+        capturedOutput = io.StringIO()
+        sys.stdout = capturedOutput
+        testShowAsciiBarchart.apply(input_)
+        sys.stdout = sys.__stdout__ 
+        self.assertEqual(capturedOutput.getvalue(), 'Red  : **\nGreen: *\n')  
 
 
 if __name__ == '__main__':
