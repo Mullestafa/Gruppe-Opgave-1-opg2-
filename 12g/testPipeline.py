@@ -76,7 +76,9 @@ class TestSteps(unittest.TestCase):
     def test_Average(self):
         self.assertEqual(steps.Average.apply([1, 2, 3]), 2)
         self.assertEqual(steps.Average.apply([4, 5, 6, 7]), 5.5)
-
+ 
+    def test_PigLatin(self):
+        self.assertEqual(steps.PigLatin.apply('Hello World'), 'elloHay orldWay')
 
 if __name__ == '__main__':
     unittest.main()
