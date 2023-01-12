@@ -144,11 +144,14 @@ class ShowAsciiBarchart:
 # Opgave E
 
 class Average:
-    def __init__(self, numbers: list):
-        self.numbers = numbers
-        self.mean = sum(numbers) / len(numbers)
-        return self.mean
-
+    @classmethod
+    def apply(self, numbers: list):
+        mean = sum(numbers) / len(numbers)
+        return mean
+    
+    @classmethod
+    def description(self):
+        return 'calculates the average of a list of numbers'
 
 class PigLatin:
     def apply(self, w: str):

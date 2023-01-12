@@ -73,6 +73,10 @@ class TestSteps(unittest.TestCase):
         sys.stdout = sys.__stdout__ 
         self.assertEqual(capturedOutput.getvalue(), 'Red  : **\nGreen: *\n')  
 
+    def test_Average(self):
+        self.assertEqual(steps.Average.apply([1, 2, 3]), 2)
+        self.assertEqual(steps.Average.apply([4, 5, 6, 7]), 5.5)
+
 
 if __name__ == '__main__':
     unittest.main()
