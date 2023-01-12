@@ -65,7 +65,7 @@ class Map:
 # Opgave C
 class Pipeline:
     # Takes a list of steps as an argument
-    def __init__(self, steps):
+    def __init__(self, steps:list):
         self.steps = steps
     
     # Adds additional steps to the list of steps
@@ -74,13 +74,14 @@ class Pipeline:
     
     # Iterates over the list of steps and calls the apply function on every step
     def apply(self, input_):
+        result = input_
         for step in self.steps:
-            input_ = step.apply(input_)
-        return input_
+            result = step.apply(result)
+        return result
     
     # Returns a string that lists the description of each step
     def description(self):
-        return print(','.join([step.description() for step in self.steps]))
+        return print('\n'.join([step.description() for step in self.steps]))
 
 # Opgave D
 class CsvReader:
