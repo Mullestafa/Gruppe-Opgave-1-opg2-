@@ -55,4 +55,6 @@ class Map:
     def __init__(self,step):
         self.step = step
     def apply(self, inp:list):
-        [step.apply(i) for i in inp]
+        return [self.step.apply(i) for i in inp]
+    def description(self):
+        return f"for every element in input list: {self.step.description()}"
