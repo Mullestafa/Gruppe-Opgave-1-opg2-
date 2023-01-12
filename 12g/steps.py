@@ -18,22 +18,26 @@ class Repeater:
 
 class GeneralSum:
     def __init__(self, n_elm, op:str):
-        self.n_elm = n_elm
-        self.op = op
-        if self.op == "+":
-            self.fun = (lambda x,y : x + y)
-        elif self.op == "-":
-            self.fun = (lambda x,y : x - y)
-        elif self.op == "*":
-            self.fun = (lambda x,y : x * y)
-        elif self.op == "/":
-            self.fun = (lambda x,y : x / y)
-        elif self.op == "%":
-            self.fun = (lambda x,y : x % y)
-        elif self.op == "//":
-            self.fun = (lambda x,y : x // y)
+        ## Allow passing of string type operators, for ease of use
+        if op == "+":
+            fun = (lambda x,y : x + y)
+        elif op == "-":
+            fun = (lambda x,y : x - y)
+        elif op == "*":
+            fun = (lambda x,y : x * y)
+        elif op == "/":
+            fun = (lambda x,y : x / y)
+        elif op == "%":
+            fun = (lambda x,y : x % y)
+        elif op == "//":
+            fun = (lambda x,y : x // y)
         else:
-            raise ValueError("invalid operator")
+            #otherwise, assume it's a custom lambda function
+            fun = op
+
+        self.fun = fun
+        self.op = op
+        self.n_elm = n_elm
     def apply(self, inp:list):
         acc = self.n_elm
         for i in inp:
