@@ -1,9 +1,5 @@
-<<<<<<< HEAD:12g/12g.py
-#Opgave A
 
-=======
 # Opgave A
->>>>>>> 9682a0f9a0f116f445a0b81fe6081c49040c36c6:12g/steps.py
 class AddConst:
     def __init__(self, c):
         self.c = c
@@ -54,16 +50,9 @@ class SumNum(GeneralSum):
 class ProductNum(GeneralSum):
     def __init__(self):
         super().__init__(1,"*")
-<<<<<<< HEAD:12g/12g.py
-    #def apply(self, inp):
-    #    return 
-    def description(self) -> str:
-        return "give value after accumulating (acc * elm) to each element in input list (starting with acc = {self.n_elm})"
-    
 
 # Opgave C
-=======
->>>>>>> 9682a0f9a0f116f445a0b81fe6081c49040c36c6:12g/steps.py
+
 
 # Opgave B
 class Map:
