@@ -89,6 +89,7 @@ class Pipeline:
 
 # Opgave D
 class CsvReader:
+    @classmethod
     def apply(self, file:str):
         output = []
         with open(file, newline='') as csvfile:
@@ -96,10 +97,12 @@ class CsvReader:
             for row in file_reader:
                 output.append(row)
         return output
+    @classmethod
     def description(self):
         return "Make csv file into list of dicts"
 
 class CritterStats:
+    @classmethod
     def apply(self, data:list):
         colourdict = {}
         for i in data:
@@ -109,8 +112,12 @@ class CritterStats:
             else:
                 colourdict[this_colour] = 1
         return colourdict
+    @classmethod
+    def description(self):
+        return "makes a dictonary of colors and their frequency"
 
 class ShowAsciiBarchart:
+    @classmethod
     def apply(self, d:dict):
         keylist = []
         maxlen = 0
@@ -127,8 +134,11 @@ class ShowAsciiBarchart:
             out += ": "                     # add colon
             out += '*' * d[i]               # add asterisks
             print(out)
+    def description(self):
+        return "makes an ascii barchart of the input dictonary"
 
 
+<<<<<<< HEAD
 
 
 class PigLatin:
@@ -151,5 +161,14 @@ class PigLatin:
 
     def description(self):
         return "Pig-latinize a sentence"
+=======
+# Opgave E
+
+class Average:
+    def __init__(self, numbers: list):
+        self.numbers = numbers
+        self.mean = sum(numbers) / len(numbers)
+        return self.mean
+>>>>>>> fa1ae3b62347220bea994a56227545e62c65b190
 
 
