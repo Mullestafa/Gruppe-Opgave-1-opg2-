@@ -138,7 +138,16 @@ class ShowAsciiBarchart:
         return "makes an ascii barchart of the input dictonary"
 
 
-<<<<<<< HEAD
+
+
+
+# Opgave E
+
+class Average:
+    def __init__(self, numbers: list):
+        self.numbers = numbers
+        self.mean = sum(numbers) / len(numbers)
+        return self.mean
 
 
 class PigLatin:
@@ -161,14 +170,3 @@ class PigLatin:
 
     def description(self):
         return "Pig-latinize a sentence"
-=======
-# Opgave E
-
-class Average:
-    def __init__(self, numbers: list):
-        self.numbers = numbers
-        self.mean = sum(numbers) / len(numbers)
-        return self.mean
->>>>>>> fa1ae3b62347220bea994a56227545e62c65b190
-
-
