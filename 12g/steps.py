@@ -138,6 +138,9 @@ class ShowAsciiBarchart:
         return "makes an ascii barchart of the input dictonary"
 
 
+
+
+
 # Opgave E
 
 class Average:
@@ -150,3 +153,23 @@ class Average:
     def description(self):
         return 'calculates the average of a list of numbers'
 
+class PigLatin:
+    def apply(self, w: str):
+        words = w.split()
+        for i in range(len(words)):
+            if words[i][0].lower() in "aeiou":
+                words[i] += "way"
+            else:
+                words[i] = words[i][1:] + words[i][0] + "ay"    
+            ## Handle common punctuation
+            punct = ""
+            for j in words[i]:
+                if j in ".,?!":
+                    punct += j
+            words[i] = words[i].replace('.', '').replace(',', '')
+            words[i] = words[i].replace('?', '').replace('!', '')
+            words[i] += punct
+        return " ".join(words)
+
+    def description(self):
+        return "Pig-latinize a sentence"
