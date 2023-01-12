@@ -81,7 +81,7 @@ class Pipeline:
     
     # Returns a string that lists the description of each step
     def description(self):
-        return print('\n'.join([step.description() for step in self.steps]))
+        return ('\n'.join([step.description() for step in self.steps]))
 
 # Opgave D
 class CsvReader:

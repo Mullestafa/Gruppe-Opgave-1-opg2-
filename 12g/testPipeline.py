@@ -36,5 +36,23 @@ class TestSteps(unittest.TestCase):
         self.assertEqual(testMap.apply([1,2,3,4,5]), [6,7,8,9,10])
         self.assertEqual(testMap.description(),"for every element in input list: add 5 to input")
 
+    def test_Pipeline(self):
+        add_const = steps.AddConst(5)
+        repeater = steps.Repeater(3)
+        pipeline = steps.Pipeline([add_const, repeater])
+
+        # test apply method
+        self.assertEqual(pipeline.apply(3), [8, 8, 8])
+        self.assertEqual(pipeline.apply(-2), [3, 3, 3])
+
+        # test add_step method
+        product_num = steps.ProductNum()
+        pipeline.add_step(product_num)
+        self.assertEqual(pipeline.apply(-2), 27)
+
+        # test description method
+        self.assertEqual(pipeline.description(), "add 5 to input\ngive list containing input 3 times\ngive value after accumulating (acc * elm) to each element in input list (starting with acc = 1)")
+
+
 if __name__ == '__main__':
     unittest.main()
