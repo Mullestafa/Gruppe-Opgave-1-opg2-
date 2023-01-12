@@ -1,3 +1,5 @@
+#Opgave A
+
 class AddConst:
     def __init__(self, c):
         self.c = c
@@ -56,4 +58,7 @@ class ProductNum(GeneralSum):
     #    return 
     def description(self) -> str:
         return "give value after accumulating (acc * elm) to each element in input list (starting with acc = {self.n_elm})"
+    
+
+# Opgave C
 
