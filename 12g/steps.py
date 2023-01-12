@@ -154,6 +154,7 @@ class Average:
         return 'calculates the average of a list of numbers'
 
 class PigLatin:
+    @classmethod
     def apply(self, w: str):
         words = w.split()
         for i in range(len(words)):
@@ -170,6 +171,6 @@ class PigLatin:
             words[i] = words[i].replace('?', '').replace('!', '')
             words[i] += punct
         return " ".join(words)
-
+    @classmethod
     def description(self):
         return "Pig-latinize a sentence"
