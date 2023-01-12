@@ -138,8 +138,12 @@ class ShowAsciiBarchart:
         return "makes an ascii barchart of the input dictonary"
 
 
+# Opgave E
 
-
-
+class Average:
+    def __init__(self, numbers: list):
+        self.numbers = numbers
+        self.mean = sum(numbers) / len(numbers)
+        return self.mean
 
 
