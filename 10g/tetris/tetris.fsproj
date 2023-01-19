@@ -13,6 +13,7 @@
   <ItemGroup>
     <Compile Include="tetris.fsi" />
     <Compile Include="tetris.fs" />
+    <!-- <Compile Include="test.fsi" /> -->
     <Compile Include="tetrisApp.fsx" />
   </ItemGroup>
 

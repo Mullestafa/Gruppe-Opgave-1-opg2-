@@ -15,6 +15,8 @@ type Color =
     | Green
     | Purple
 
+val randomNumber: unit -> int
+
 /// <summary>
 /// Converts a Tetris Color to a Canvas color.
 /// </summary>
