@@ -82,6 +82,8 @@ type Tetromino (a:bool[,], c:Color, o: Position) =
 (*The S, Z, T, L, J, O, and I types are all classes that inherit from the Tetromino abstract class. Each of these
 classes represents a specific type of Tetromino piece with a unique shape and color. The clone method is overridden
 in each of these classes to create a copy of the specific Tetromino.*)
+
+
 type S() =
     inherit Tetromino (array2D ([[false; true; true];
                 [true; true; false]]), Green, (5, 0))
@@ -182,7 +184,7 @@ type board (w:int, h: int) =
         true
 
     (*removes the active piece from the board (paints over it) and returns it.*)
-    member this.removeFromBoard () : Tetromino option =
+    member this.take () : Tetromino option =
         Array2D.iteri (fun i j v -> if v then do this.board[(i+(fst this.activePiece.offset)),(j+(snd this.activePiece.offset))] <- None) this.activePiece.image  
         Some this.activePiece
 
@@ -225,7 +227,7 @@ type board (w:int, h: int) =
 
     (*removes any full rows from the board and moves the rows above them down.*)        
     member this.removeFullLines () =
-        this.removeFromBoard() |> ignore
+        this.take() |> ignore
         let mutable i = this.height - 1
         while not(i = -1) do
             if this.checkIfLineIsFull(i) then
@@ -254,7 +256,7 @@ let draw (w:int) (h:int) (b:board) : Canvas.canvas =
 let react (b:board) (k:Canvas.key) : (board option) =
     match Canvas.getKey k with
     | Canvas.LeftArrow ->
-        b.removeFromBoard() |> ignore //first removes the active piece from the board.
+        b.take() |> ignore //first removes the active piece from the board.
         
         (*If the left arrow key is pressed, it moves the active piece one space to the left if possible.*)
         if not((fst b.activePiece.offset) =0) then
@@ -272,7 +274,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.put b.activePiece |> ignore
             Some b
     | Canvas.RightArrow ->
-        b.removeFromBoard() |> ignore // first removes the active piece from the board.
+        b.take() |> ignore // first removes the active piece from the board.
 
         (*If the right arrow key is pressed, it moves the active piece one space to the right if possible.*)
         if not((fst b.activePiece.offset) = (b.width - (b.activePiece.width()))) then
@@ -291,7 +293,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             Some b
 
     | Canvas.Space | Canvas.UpArrow ->
-        b.removeFromBoard() |> ignore // first removes the active piece from the board.
+        b.take() |> ignore // first removes the active piece from the board.
 
         (*checks if the piece has reached the bottom of the board or if it has collided with another piece.*)
         if not(b.checkIfPieceIsFallen(b.activePiece)) then //If it has not, it moves the active piece down by one space and places it on the board.
@@ -315,7 +317,7 @@ let react (b:board) (k:Canvas.key) : (board option) =
             b.put b.activePiece |> ignore
             Some b
     | Canvas.DownArrow ->
-        b.removeFromBoard() |> ignore // first removes the active piece from the board.
+        b.take() |> ignore // first removes the active piece from the board.
 
         (*checks if the piece has reached the bottom of the board or if it has collided with another piece.*)
         if not(b.checkIfPieceIsFallen(b.activePiece)) then //If it has not, it moves the active piece down by one space and places it on the board.

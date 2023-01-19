@@ -84,6 +84,10 @@ type Tetromino =
     /// <returns>The present width of the Tetromino's shape.</returns>
     member width: unit -> int
 
+
+///PRØVERATLAVEENPRIK
+
+
 /// <summary>
 /// The board type represents the board in a Tetris game.
 /// </summary>
@@ -119,7 +123,7 @@ type board =
     /// Takes the active piece from the board. Returns a piece or None if no piece is active.
     /// </summary>
     /// <returns>The active piece if one exists, or None if no piece is active.</returns>
-    member removeFromBoard: unit -> Tetromino option
+    member take: unit -> Tetromino option
 
     /// <summary>
     /// Returns the board.
