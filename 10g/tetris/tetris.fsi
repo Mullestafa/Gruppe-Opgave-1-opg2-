@@ -27,6 +27,8 @@ val toCanvasColor : c:Color -> Canvas.color
 /// </summary>
 type Position = int*int
 
+
+
 /// <summary>
 /// The Tetromino type represents a Tetromino piece in a Tetris game.
 /// </summary>
@@ -57,6 +59,8 @@ type Tetromino =
     /// </summary>
     member rotateRight: unit -> unit
 
+    member rotateLeft: unit -> unit
+
     /// <summary>
     /// The color of the Tetromino.
     /// </summary>
@@ -84,8 +88,29 @@ type Tetromino =
     /// <returns>The present width of the Tetromino's shape.</returns>
     member width: unit -> int
 
+    type S =
+        inherit Tetromino
+        new: unit-> S
+        
+    type Z =
+        inherit Tetromino
+        new: unit-> Z
 
-///PRØVERATLAVEENPRIK
+    type T =
+        inherit Tetromino
+        new: unit-> T
+
+    type J =
+        inherit Tetromino
+        new: unit-> J
+
+    type O =
+        inherit Tetromino
+        new: unit-> O
+
+    type I =
+        inherit Tetromino
+        new: unit-> I
 
 
 /// <summary>
